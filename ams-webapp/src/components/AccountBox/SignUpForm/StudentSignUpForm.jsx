@@ -31,7 +31,7 @@ export function StudSignUpForm () {
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
                         <SignUpFormContainer>
-                            <Input type='number' inputmode="numeric" placeholder='Employee Number'/>
+                            <Input type='number' inputmode="numeric" placeholder='Student Number'/>
                             <Input type='text' placeholder='Department'/>
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
