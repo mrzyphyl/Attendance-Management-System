@@ -8,9 +8,7 @@ function ProfessorHomeBox() {
     <Box sx={{ display: 'flex' }}>
       <ProfessorSideBar/>
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
-        <BoxContent>
-          <h1>Hi</h1>
-          
+        <BoxContent>  
         </BoxContent>
       </Box>
     </Box>
