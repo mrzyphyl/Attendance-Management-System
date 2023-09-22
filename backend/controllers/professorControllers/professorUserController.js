@@ -31,35 +31,64 @@ const getMultiProfessorUser = asyncHandler (async (req, res) => {
 //Post Professor User
 //@access Public
 const postProfessorUser = asyncHandler (async (req, res) => {
-    const { FirstName, LastName, Subjects, Department } = req.body
+    const { 
+        firstname, 
+        middlename, 
+        lastname, 
+        age, 
+        birthday, 
+        gender, 
+        address, 
+        user_status, 
+        employee_number, 
+        department, 
+        email, 
+        password 
+    } = req.body
 
-    if(!FirstName && !LastName){
+    if(!firstname && !lastname){
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check if user exist
-    const userExist = await professorUser.findOne({FirstName, LastName})
+    const userExist = await professorUser.findOne({email})
 
     if(userExist){
         res.status(400)
-        throw new Error('User already exists')
+        throw new Error('Email already in use')
     }
 
-    const profUser = await professorUser.create({
-        FirstName,
-        LastName,
-        Subjects,
-        Department
+    const professor = await professorUser.create({
+        firstname,
+        middlename,
+        lastname,
+        age,
+        birthday,
+        gender,
+        address,
+        user_status,
+        employee_number,
+        department,
+        email,
+        password
     })
 
-    if(profUser){
+    if(professor){
         res.status(201).json({
-            _id: profUser.id,
-            FirstName: profUser.FirstName,
-            LastName: profUser.LastName,
-            Subjects: profUser.Subjects,
-            Department: profUser.Department
+            _id: professor.id,
+            firstname: professor.firstname,
+            middlename: professor.middlename,
+            lastname: professor.lastname,
+            age: professor.age,
+            birthday: professor.birthday,
+            gender: professor.gender,
+            address: professor.address,
+            user_status: professor.user_status,
+            employee_number: professor.employee_number,
+            department: professor.department,
+            email: professor.email,
+            password: professor.password
         })
     } else {
         res.status(400)

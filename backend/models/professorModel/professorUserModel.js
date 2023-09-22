@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add your Complete Address']
     },
-    status: {
+    user_status: {
         type: String,
         required: [true, 'Please add your Marital Status']
     },

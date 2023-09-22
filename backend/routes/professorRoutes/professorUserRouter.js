@@ -6,7 +6,8 @@ const {
     deltProfessorUser, 
     getOneProfessorUser, 
     deltMultiProfessorUser, 
-    getMultiProfessorUser } = require('../../controllers/professorControllers/professorUserController')
+    getMultiProfessorUser
+} = require('../../controllers/professorControllers/professorUserController')
 const router = express.Router()
 
 router.route('/').get(getProfessorUser).post(postProfessorUser)
