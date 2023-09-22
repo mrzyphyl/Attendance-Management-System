@@ -1,8 +1,9 @@
 import React from 'react'
+import StudentHomeBox from '../../components/HomeBox/StudentHomeBox'
 
 function StudentHome() {
   return (
-    <div>StudentHome</div>
+    <StudentHomeBox/>
   )
 }
 

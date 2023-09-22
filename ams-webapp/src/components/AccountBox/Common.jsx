@@ -17,7 +17,7 @@ export const BoxContainer = styled.div `
     }
 `
 
-export const FormContainer = styled.div `
+export const FormContainer = styled.form `
     position: relative;
     width: 100%;
     display: flex;
@@ -136,7 +136,7 @@ export const SignUpBoxContainer = styled.div `
     background-color: #fff;
 `
 
-export const SignUpFormBoxContainer = styled.div `
+export const SignUpFormBoxContainer = styled.form `
     width: 100%;
     display: flex;
     flex-direction: column;

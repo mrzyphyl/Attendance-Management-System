@@ -1,28 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from "styled-components";
 import { BoldLink, BoxContainer, FormContainer, Input, MutedLink, SubmitButton, SubmitLink, HeaderContainer, HeaderText} from './Common';
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Marginer } from '../Marginer/Margin';
 import { devices } from '../Device/DeviceSizes';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export function LoginForm(){
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+  
+    const navigate = useNavigate()
+  
+    const onSubmit = (e) => {
+      e.preventDefault();
+      axios.post('http://localhost:5000/api/professor-user/login', { email, password })
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+      navigate("/")
+    }
     return(
         <BoxContainer>
             <ImageContainer>
                 <LogoImg src={LogoNoBG}/>
             </ImageContainer>
-            <FormContainer>
+            <FormContainer onSubmit={onSubmit}>
                 <HeaderContainer>
                     <HeaderText>Welcome Back</HeaderText>
                     <SmallText>Please sign-in to continue!</SmallText>
                 </HeaderContainer>
-                <Input type='email' placeholder='Email' />
-                <Input type='password' placeholder='Password' />
+                <Input 
+                type='email' 
+                placeholder='Email'
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}/>
+                <Input 
+                type='password' 
+                placeholder='Password'
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}/>
                 <Marginer direction="vertical" margin={5} />
                 <MutedLink href="#">Forget your password?</MutedLink>
                 <Marginer direction="vertical" margin="1.6em" />
                 <SubmitButton type="submit">
-                    <SubmitLink href="#">Sign in</SubmitLink>
+                    <SubmitLink>Sign in</SubmitLink>
                 </SubmitButton>
                 <Marginer direction="vertical" margin="1em" />
                 <MutedLink href="#">

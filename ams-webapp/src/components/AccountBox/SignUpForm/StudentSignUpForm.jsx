@@ -1,10 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import { CancelButton, CancelLink, HeaderText, Input, SignUpBoxContainer, SignUpContainer, SignUpFormBoxContainer, SignUpFormContainer, SignUpScrollableContent } from '../Common'
 import { Marginer } from '../../Marginer/Margin'
 import { devices } from '../../Device/DeviceSizes'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export function StudSignUpForm () {
+    const navigate = useNavigate()
+
+    const [ firstname, setFirstname ] = useState()
+    const [ middlename, setMiddlename ] = useState()
+    const [ lastname, setLastname ] = useState()
+    const [ age, setAge ] = useState()
+    const [ birthday, setBirthday ] = useState()
+    const [ gender, setGender ] = useState()
+    const [ address, setAddress ] = useState()
+    const [ user_status, setUser_Status ] = useState()
+    const [ student_number, setStudent_Number ] = useState()
+    const [ department, setDepartment ] = useState()
+    const [ email, setEmail ] = useState()
+    const [ password, setPassword ] = useState()
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/api/student-user', { 
+            firstname, 
+            middlename, 
+            lastname, 
+            age, 
+            birthday, 
+            gender, 
+            address, 
+            user_status, 
+            student_number, 
+            department, 
+            email, 
+            password  
+        })
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
+        navigate("/student-home")
+    }
+
     return (
         <SignUpContainer>
             <SignUpBoxContainer>
@@ -12,41 +50,103 @@ export function StudSignUpForm () {
                     <HeaderText>Registration Form: </HeaderText>
                 </HContainer>
                 <SignUpScrollableContent>
-                    <SignUpFormBoxContainer>
+                    <SignUpFormBoxContainer onSubmit={onSubmit}>
                         <SignUpFormContainer>
-                            <Input type='text' placeholder='First Name'/>
-                            <Input type='text' placeholder='Middle Name'/>
-                            <Input type='text' placeholder='Last Name'/>
+                            <Input 
+                            type='text' 
+                            placeholder='First Name'
+                            value={firstname} 
+                            onChange={(e) => setFirstname(e.target.value)}/>
+
+                            <Input 
+                            type='text' 
+                            placeholder='Middle Name'
+                            value={middlename}
+                            onChange={(e) => setMiddlename(e.target.value)}/>
+
+                            <Input 
+                            type='text' 
+                            placeholder='Last Name'
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}/>
+
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
                         <SignUpFormContainer>
-                            <Input type='number' inputMode='numeric' placeholder='Age'/>
-                            <Input type='date' placeholder='Birthday'/>
-                            <Input type='text' placeholder='Gender'/>
+                            <Input 
+                            type='number' 
+                            inputMode='numeric'
+                            placeholder='Age'
+                            value={age}
+                            onChange={(e) => setAge(e.target.value)}/>
+
+                            <Input 
+                            type='date' 
+                            placeholder='Birthday'
+                            value={birthday}
+                            onChange={(e) => setBirthday(e.target.value)}/>
+
+                            <Input 
+                            type='text' 
+                            placeholder='Gender'
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}/>
+
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
                         <SignUpFormContainer>
-                            <Input type='text' placeholder='Complete Address'/>
-                            <Input type='text' placeholder='Marital Status'/>
+                            <Input 
+                            type='text' 
+                            placeholder='Complete Address'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}/>
+
+                            <Input 
+                            type='text' 
+                            placeholder='Marital Status'
+                            value={user_status}
+                            onChange={(e) => setUser_Status(e.target.value)}/>
+
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
                         <SignUpFormContainer>
-                            <Input type='number' inputmode="numeric" placeholder='Student Number'/>
-                            <Input type='text' placeholder='Department'/>
+                            <Input 
+                            type='number' 
+                            inputmode="numeric" 
+                            placeholder='Employee Number'
+                            value={student_number}
+                            onChange={(e) => setStudent_Number(e.target.value)}/>
+
+                            <Input 
+                            type='text' 
+                            placeholder='Department'
+                            onChange={(e) => setDepartment(e.target.value)}/>
+
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
                         <SignUpFormContainer>
-                            <Input type='email' placeholder='Email Address'/>
-                            <Input type='password' placeholder='Password'/>
+                            <Input 
+                            type='email' 
+                            placeholder='Email Address'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}/>
+
+                            <Input 
+                            type='password' 
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}/>
+
                             <Input type='password' placeholder='Confirm Password'/>
+
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>
-                        <ButtonSubmit href='/student-home'>
+                        <ButtonSubmit>
                             <ButtonType>Register</ButtonType>
                         </ButtonSubmit>
                         <Marginer direction="vertical" margin={'0.5em'}/>
-                        <CancelLink  href='/'>
-                            <CancelButton>Cancel</CancelButton>
+                        <CancelLink>
+                            <CancelButton onClick={() => {navigate("/")}}>Cancel</CancelButton>
                         </CancelLink>
                     </SignUpFormBoxContainer>
                 </SignUpScrollableContent>

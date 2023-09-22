@@ -24,8 +24,8 @@ const getOneStudentUser = asyncHandler (async (req, res) => {
 //Get MultipleStudent User
 //@access Public
 const getMultiStudentUser = asyncHandler (async (req, res) => {
-    const user = await studentUser.find({studentUser})
-    res.status(200).json(user)
+    const student = await studentUser.find({studentUser})
+    res.status(200).json(student)
 })
 
 //Login Professor
@@ -54,37 +54,64 @@ const loginStudent = asyncHandler (async (req, res) => {
 //Post Student User
 //@access Public
 const postStudentUser = asyncHandler (async (req, res) => {
-    const { FirstName, LastName, Age, Course, Section } = req.body
+    const { 
+        firstname, 
+        middlename, 
+        lastname, 
+        age, 
+        birthday, 
+        gender, 
+        address, 
+        user_status, 
+        student_number, 
+        department, 
+        email, 
+        password 
+     } = req.body
 
-    if(!FirstName && !LastName){
+    if(!firstname && !lastname){
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check if user exist
-    const userExist = await studentUser.findOne({FirstName, LastName})
+    const userExist = await studentUser.findOne({email})
 
     if(userExist){
         res.status(400)
-        throw new Error('User already exists')
+        throw new Error('Email already in use')
     }
 
-    const studUser = await studentUser.create({
-        FirstName,
-        LastName,
-        Age,
-        Course,
-        Section
+    const student = await studentUser.create({
+        firstname, 
+        middlename, 
+        lastname, 
+        age, 
+        birthday, 
+        gender, 
+        address, 
+        user_status, 
+        student_number, 
+        department, 
+        email, 
+        password 
     })
 
-    if(studUser){
+    if(student){
         res.status(201).json({
-            _id: studUser.id,
-            FirstName: studUser.FirstName,
-            LastName: studUser.LastName,
-            Age: studUser.Age,
-            Course: studUser.Course,
-            Section: studUser.Section
+            _id: student.id,
+            firstname: student.firstname,
+            middlename: student.middlename,
+            lastname: student.lastname,
+            age: student.age,
+            birthday: student.birthday,
+            gender: student.gender,
+            address: student.address,
+            user_status: student.user_status,
+            student_number: student.student_number,
+            department: student.department,
+            email: student.email,
+            password: student.password
         })
     } else {
         res.status(400)
@@ -95,9 +122,9 @@ const postStudentUser = asyncHandler (async (req, res) => {
 //Update Student User
 //@access Public
 const updateStudentUser = asyncHandler (async (req, res) => {
-    const studUser = await studentUser.findById(req.params.id)
+    const student = await studentUser.findById(req.params.id)
 
-    if(!studUser){
+    if(!student){
         res.status(400)
         throw new Error('User no found')
     }
@@ -112,14 +139,14 @@ const updateStudentUser = asyncHandler (async (req, res) => {
 //Delete Student User
 //@access Public
 const deltStudentUser = asyncHandler (async (req, res) => {
-    const studUser = await studentUser.findById(req.params.id)
+    const student = await studentUser.findById(req.params.id)
 
-    if(!studUser){
+    if(!student){
         res.status(400)
         throw new Error('User no found')
     }
 
-    await studUser.deleteOne()
+    await student.deleteOne()
 
     res.status(200).json({ id: req.params.id})
 })
@@ -128,14 +155,14 @@ const deltStudentUser = asyncHandler (async (req, res) => {
 //Delete Multiple Student User
 //@access Public
 const deltMultiStudentUser = asyncHandler (async (req, res) => {
-    const studUser = await studentUser.findById(req.params.id)
+    const student = await studentUser.findById(req.params.id)
 
-    if(!studUser){
+    if(!student){
         res.status(400)
         throw new Error('User no found')
     }
 
-    await studUser.deleteMany()
+    await student.deleteMany()
 
     res.status(200).json({ id: req.params.id})
 })
