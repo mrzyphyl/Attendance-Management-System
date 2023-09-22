@@ -12,6 +12,7 @@
   "author": "Job Dispo",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.5.0",
     "concurrently": "^8.2.1",
     "dotenv": "^16.3.1",
     "mongoose": "^7.5.2",

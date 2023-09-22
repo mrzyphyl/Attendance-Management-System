@@ -26,7 +26,7 @@ export function LoginForm(){
                 </SubmitButton>
                 <Marginer direction="vertical" margin="1em" />
                 <MutedLink href="#">
-                 Don't have an account?{" "}
+                Don't have an account?{" "}
                 <BoldLink href="/roles">
                 Signup
                 </BoldLink>
