@@ -6,7 +6,8 @@ const {
     deltStudentUser, 
     getOneStudentUser, 
     deltMultiStudentUser, 
-    getMultiStudentUser 
+    getMultiStudentUser, 
+    loginStudent
 } = require('../../controllers/studentControllers/studentUserController')
 const router = express.Router()
 
@@ -15,5 +16,7 @@ router.route('/').get(getStudentUser).post(postStudentUser)
 router.route('/:id').put(updateStudentUser).delete(deltStudentUser).get(getOneStudentUser)
 
 router.route('/:ids').delete(deltMultiStudentUser).get(getMultiStudentUser)
+
+router.route('/login').post(loginStudent)
 
 module.exports = router

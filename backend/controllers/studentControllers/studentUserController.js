@@ -28,6 +28,29 @@ const getMultiStudentUser = asyncHandler (async (req, res) => {
     res.status(200).json(user)
 })
 
+//Login Professor
+//@access Public
+const loginStudent = asyncHandler (async (req, res) => {
+    let { email, password } = req.body
+
+    if(!email && !password){
+        res.status(400)
+        throw new Error('Please add all fields')
+    }
+
+    //Check if user exist
+    const userExist = await studentUser.findOne({email, password})
+
+    if(userExist){
+        const getUser = await studentUser.findOne(userExist)
+        res.status(200).json(getUser)
+    } else {
+        res.status(400)
+        throw new Error('Wrong Credentials')
+    }
+
+})
+
 //Post Student User
 //@access Public
 const postStudentUser = asyncHandler (async (req, res) => {
@@ -124,5 +147,6 @@ module.exports = {
     postStudentUser,
     updateStudentUser,
     deltStudentUser,
-    deltMultiStudentUser
+    deltMultiStudentUser,
+    loginStudent
 }
