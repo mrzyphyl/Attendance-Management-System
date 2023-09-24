@@ -38,6 +38,7 @@ const closedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
     }),
+    position: 'sticky',
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
@@ -78,6 +79,7 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
+    marginLeft: '-65px',
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
@@ -113,7 +115,7 @@ export default function ProfessorSideBar() {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <AppBar position='relative' elevation={0} open={open} style={{ background: '#c0b521' }}>
+            <AppBar position='relative' elevation={0} open={open} style={{ background: '#c0b521', position: 'sticky' }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"

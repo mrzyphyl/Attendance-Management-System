@@ -101,10 +101,10 @@ export const Modal = ({ showModal, setShowModal }) => {
             <ModalWrapper showModal={showModal}>
               <ModalContent>
                <IFrame 
-               src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+               src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
                title='Youtube' 
                frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;" 
                allowfullscreen>
                </IFrame>
               </ModalContent>
