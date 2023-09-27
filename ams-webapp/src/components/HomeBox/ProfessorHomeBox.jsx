@@ -4,6 +4,7 @@ import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
 import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton } from './Common'
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Modal } from '../Modal/Modal'
+import { Marginer } from '../Marginer/Margin'
 
 
 function ProfessorHomeBox() {
@@ -22,9 +23,11 @@ function ProfessorHomeBox() {
           <HeroContainer>
             <HomeContent>
               <WelcomeHeader>Welcome to Attendance Management Systems</WelcomeHeader>
+              <Marginer direction="vertical" margin={'0.1em'}/>
               <Paragraph>
                 Aims to create a QR based real-time attendance of students per subject
               </Paragraph>
+              <Marginer direction="vertical" margin={'0.5em'}/>
               <ButtonContainer>
                 <StartButton>
                   Get Started

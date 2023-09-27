@@ -43,4 +43,5 @@ function StudentHomeBox() {
   )
 }
 
+
 export default StudentHomeBox

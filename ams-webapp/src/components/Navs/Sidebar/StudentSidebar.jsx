@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -38,6 +38,7 @@ const closedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
     }),
+    position: 'sticky',
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
@@ -78,6 +79,7 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
+    marginLeft: '-65px',
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
@@ -113,7 +115,7 @@ export default function StudentSideBar() {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <AppBar position='relative' elevation={0} open={open} style={{ background: '#c0b521' }}>
+            <AppBar position='relative' elevation={0} open={open} style={{ background: '#c0b521', position: 'sticky' }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
