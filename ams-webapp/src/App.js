@@ -7,6 +7,10 @@ import StudentHome from './pages/HomePage/StudentHome'
 import ProfessorHome from './pages/HomePage/ProfessorHome'
 import AboutS from './pages/AboutPage/AboutS'
 import AboutP from './pages/AboutPage/AboutP'
+import StudentSettings from './pages/SettingsPage/StudentSettings'
+import ProfessorSettings from './pages/SettingsPage/ProfessorSettings'
+import StudentClass from './pages/ClassPage/StudentClass'
+import ProfessorClass from './pages/ClassPage/ProfessorClass';
 
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
         <Route path='/professor-home' exact element={<ProfessorHome/>}/>
         <Route path='/about-us-s' exact element={<AboutS/>}/>
         <Route path='/about-us-p' exact element={<AboutP/>}/>
+        <Route path='/student-settings' exact element={<StudentSettings/>}/>
+        <Route path='/professor-settings' exact element={<ProfessorSettings/>}/>
+        <Route path='/student-classes' exact element={<StudentClass/>}/>
+        <Route path='/professor-classes' exact element={<ProfessorClass/>}/>
       </Routes>
     </>
   );

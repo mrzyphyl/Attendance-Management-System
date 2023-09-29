@@ -159,7 +159,7 @@ export default function StudentSideBar() {
                             <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} >
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate("/student-classes")}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,
@@ -220,7 +220,7 @@ export default function StudentSideBar() {
                             <ListItemText primary="About Us" sx={{ opacity: open ? 1 : 0 }}/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} >
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate("/student-settings")}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,
