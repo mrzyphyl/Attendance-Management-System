@@ -3,7 +3,7 @@ import { devices } from "../Device/DeviceSizes";
 
 export const BoxContent  = styled.div`
     width: 100%;
-    background: #0083749c;
+    background: #0e796cb2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,3 +75,14 @@ export const StartButton = styled.button`
     }
 `
 
+export const CardContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-items: center;
+`
+
+export const HeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-items: center;
+`

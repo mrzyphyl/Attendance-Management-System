@@ -7,7 +7,7 @@ export const WelcomeHeader = styled.h1`
 
 export const AboutContent = styled.div`
     width: 100%;
-    background: #0083749c;
+    background: #0e796cb2;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -25,7 +25,7 @@ export const AboutParagraphContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #0083749c;
+    background: #0e796cb2;
 `
 
 export const AboutParagraphBox = styled.div`
@@ -59,7 +59,7 @@ export const AboutImageContent = styled.div`
     gap: 2rem;
     align-items: center;
     justify-content: center;
-    background: #0083749c;
+    background: #0e796cb2;
 `
 
 export const AboutImageContainer = styled.div`

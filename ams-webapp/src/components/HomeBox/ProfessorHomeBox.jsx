@@ -1,10 +1,11 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton } from './Common'
+import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton, CardContainer, HeaderContainer } from './Common'
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Modal } from '../Modal/Modal'
 import { Marginer } from '../Marginer/Margin'
+import Card from './Card'
 
 
 function ProfessorHomeBox() {
@@ -19,8 +20,8 @@ function ProfessorHomeBox() {
       <ProfessorSideBar/>
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
         <BoxContent>
-          <Modal showModal={showModal} setShowModal={setShowModal} />
           <HeroContainer>
+            <Modal showModal={showModal} setShowModal={setShowModal} />
             <HomeContent>
               <WelcomeHeader>Welcome to Attendance Management Systems</WelcomeHeader>
               <Marginer direction="vertical" margin={'0.1em'}/>
@@ -41,6 +42,18 @@ function ProfessorHomeBox() {
               <LogoImg src={LogoNoBG}/>
             </ImageContainer>
           </HeroContainer>
+        </BoxContent>
+        <BoxContent>
+          <HeaderContainer>
+            <WelcomeHeader>
+              3 Simple steps and you're in!
+            </WelcomeHeader>
+          </HeaderContainer>
+        </BoxContent>
+        <BoxContent>
+          <CardContainer>
+            <Card/>
+          </CardContainer>
         </BoxContent>
       </Box>
     </Box>

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 
 const Background = styled.div`
-  width: 100%;
+  width: 95%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
@@ -54,8 +54,9 @@ const CloseModalButton = styled(MdClose)`
 `
 
 const IFrame = styled.iframe`
-    width: 800px;
-    height: 500px;
+  display: flex;
+  width: 800px;
+  height: 500px;
 `
 
 export const Modal = ({ showModal, setShowModal }) => {
