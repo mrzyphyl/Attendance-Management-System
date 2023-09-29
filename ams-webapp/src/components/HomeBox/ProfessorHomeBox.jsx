@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton, CardContainer, HeaderContainer } from './Common'
+import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton, CardContainer, HeaderContainer, CardBox } from './Common'
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Modal } from '../Modal/Modal'
 import { Marginer } from '../Marginer/Margin'
@@ -37,12 +37,14 @@ function ProfessorHomeBox() {
                   Watch Video
                 </StartButton>
               </ButtonContainer>
+              <Marginer direction="vertical" margin={'0.5em'}/>
             </HomeContent>
             <ImageContainer>
               <LogoImg src={LogoNoBG}/>
             </ImageContainer>
           </HeroContainer>
         </BoxContent>
+        <Marginer direction="vertical" margin={'1px'}/>
         <BoxContent>
           <HeaderContainer>
             <WelcomeHeader>
@@ -50,11 +52,11 @@ function ProfessorHomeBox() {
             </WelcomeHeader>
           </HeaderContainer>
         </BoxContent>
-        <BoxContent>
+        <CardBox>
           <CardContainer>
             <Card/>
           </CardContainer>
-        </BoxContent>
+        </CardBox>
       </Box>
     </Box>
   )

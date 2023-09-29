@@ -1,9 +1,11 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
-import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton } from './Common'
+import { BoxContent, HeroContainer, ImageContainer, WelcomeHeader, LogoImg, HomeContent, Paragraph, ButtonContainer, StartButton, HeaderContainer, CardContainer, CardBox } from './Common'
 import StudentSideBar from '../Navs/Sidebar/StudentSidebar'
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Modal } from '../Modal/Modal'
+import { Marginer } from '../Marginer/Margin'
+import Card from './Card'
 
 function StudentHomeBox() {
   const [showModal, setShowModal] = useState(false);
@@ -32,12 +34,26 @@ function StudentHomeBox() {
                   Watch Video
                 </StartButton>
               </ButtonContainer>
+              <Marginer direction="vertical" margin={'0.5em'}/>
             </HomeContent>
             <ImageContainer>
               <LogoImg src={LogoNoBG}/>
             </ImageContainer>
           </HeroContainer>  
         </BoxContent>
+        <Marginer direction="vertical" margin={'1px'}/>
+        <BoxContent>
+          <HeaderContainer>
+            <WelcomeHeader>
+              3 Simple steps and you're in!
+            </WelcomeHeader>
+          </HeaderContainer>
+        </BoxContent>
+        <CardBox>
+          <CardContainer>
+            <Card/>
+          </CardContainer>
+        </CardBox>
       </Box>
     </Box>
   )

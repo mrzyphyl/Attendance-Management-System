@@ -1,9 +1,10 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import StudentSidebar from '../../Navs/Sidebar/StudentSidebar'
-import { AboutContent, AboutHeader, AboutHeaderContainer, AboutHeaderContent, AboutImage, AboutImageBox, AboutImageContainer, AboutImageContent, AboutInfo, AboutParagraph, AboutParagraphBox, AboutParagraphContent, WelcomeHeader } from '../Common'
+import { AboutContent, AboutHeader, AboutHeaderContainer, AboutHeaderContent, AboutImage, AboutImageBox, AboutImageContainer, AboutImageContent, AboutInfo, AboutParagraph, AboutParagraphBox, AboutParagraphContent, ContactUsContent, WelcomeHeader } from '../Common'
 import styled from 'styled-components'
 import ContactUs from '../ContactUs'
+import { Marginer } from '../../Marginer/Margin'
 
 
 function AboutUsStudent() {
@@ -47,11 +48,13 @@ function AboutUsStudent() {
             </AboutParagraph>
           </AboutParagraphBox>
         </AboutParagraphContent>
+        <Marginer direction="vertical" margin={'1px'}/>
         <AboutContent>
           <AboutHeaderContent>
             <WelcomeHeader>About Us:</WelcomeHeader>
           </AboutHeaderContent>
         </AboutContent>
+        <Marginer direction="vertical" margin={'1px'}/>
         <AboutImageBox>
           <AboutImageContent>
             <AboutImageContainer>
@@ -313,7 +316,16 @@ function AboutUsStudent() {
             </AboutImageContainer>
           </AboutImageContent>
         </AboutImageBox>
-        <ContactUs/>
+        <Marginer direction="vertical" margin={'1px'}/>
+        <AboutContent>
+          <AboutHeaderContent>
+            <WelcomeHeader>Contact Us:</WelcomeHeader>
+          </AboutHeaderContent>
+        </AboutContent>
+        <Marginer direction="vertical" margin={'1px'}/>
+        <ContactUsContent>
+          <ContactUs/>
+        </ContactUsContent>
       </Box>
     </Box>
   )

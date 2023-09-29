@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { devices } from "../Device/DeviceSizes";
+import { devices } from "../Device/DeviceSizes"
 import Connect from '../../assets/icons/cloud-network.gif'
 import QR from '../../assets/icons/qr-code.gif'
 import Time from '../../assets/icons/hourglass.gif'
@@ -60,6 +60,8 @@ const CardBoxContainer = styled.div`
     display: flex;
     align-items: center;
     justify-items: center;
+    background: white;
+    border-radius: 8px;
     margin-bottom: 50px;
 `
 

@@ -85,4 +85,13 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-items: center;
+    margin-bottom: 150px;
+`
+
+export const CardBox = styled.div`
+    margin-top: -170px; 
+    width: 100%;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

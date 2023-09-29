@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { devices } from "../Device/DeviceSizes";
 
 export const WelcomeHeader = styled.h1`
     color: white;
@@ -101,4 +102,159 @@ export const AboutInfo = styled.p`
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: rgb(75 85 99 / var(--tw-text-opacity));
+`
+
+export const ContactUsContent = styled.div`
+    width: 100%;
+    background: #0e796cb2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const ContactUsBox = styled.h2`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const FormContainer = styled.form `
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+`
+
+export const MutedLink = styled.a `
+    font-size: 12px;
+    color: rgba(107, 105, 105, 0.8);
+    font-weight: 500;
+    text-decoration: none;
+`
+
+export const BoldLink = styled.a `
+    font-size: 12px;
+    color: rgb(241, 196, 15);
+    font-weight: 500;
+    text-decoration: none;
+`
+
+export const Input = styled.input `
+    width: 97%;
+    height: 50px;
+    outline: none;
+    border: 1.5px solid rgba(44, 43, 43, 0.1);
+    padding: 0px 10px;
+    transition: all 200ms ease-in-out;
+    font-size: 12px;
+    font-weight: 500;
+
+    &::placeholder {
+    color: black;
+    }
+
+    &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+    }
+
+    &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+    }
+
+    @media ${devices.tablet} {
+      width: 80%;
+    }
+`
+
+export const TextArea = styled.textarea`
+    width: 97%;
+    height: 200px;
+    outline: none;
+    border: 1.5px solid rgba(44, 43, 43, 0.1);
+    padding: 0px 10px;
+    transition: all 200ms ease-in-out;
+    font-size: 12px;
+    font-weight: 500;
+
+    &::placeholder {
+    color: black;
+    }
+
+    &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+    }
+
+    &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+    }
+
+    @media ${devices.tablet} {
+      width: 80%;
+    }
+`
+
+export const SubmitButton = styled.button `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 11px;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: rgb(241, 196, 15);
+    background: linear-gradient(
+    58deg,
+    rgba(241, 196, 15, 1) 20%,
+    rgba(243, 172, 18, 1) 100%
+    );
+    &:hover {
+    filter: brightness(1.03);
+    }
+    @media ${devices.tablet} {
+      width: 30%;
+    }
+`
+
+export const SubmitLink = styled.a `
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration:none
+`
+
+export const HeaderContainer = styled.div `
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+
+    @media ${devices.laptop} {
+    }
+`
+
+export const HeaderText = styled.h2 `
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.24;
+    color: #020202;
+    z-index: 10;
+    margin: 0;
+`
+
+export const SmallText = styled.h5 `
+    color: #030303;
+    font-weight: 500;
+    font-size: 17px;
+    z-index: 10;
+    margin: 0;
+    margin-top: 7px;
 `
