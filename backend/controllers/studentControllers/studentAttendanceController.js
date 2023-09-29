@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const studentAttendance = require('../../models/studentModel/studentAttendanceModel')
 
 //GET All Attendance of Student
+//@route GET /api/student-user/attendance
 //@access public
 const getStudentAttendance = asyncHandler (async (req, res) => {
     const attendance = await studentAttendance.find({studentAttendance})
@@ -9,6 +10,7 @@ const getStudentAttendance = asyncHandler (async (req, res) => {
 })
 
 //GET One Attendance of Student
+//@route GET /api/student-user/attendance/:id
 //@access public
 const getOneStudentAttendance = asyncHandler (async (req, res) => {
     const attendance = await studentAttendance.findById(req.params.id)
@@ -22,6 +24,7 @@ const getOneStudentAttendance = asyncHandler (async (req, res) => {
 })
 
 //GET Multiple Attendance of Student
+//@route GET /api/student-user/attendance/:ids
 //@access public
 const getMultipleStudentAttendance = asyncHandler (async (req, res) => {
     const attendance = await studentAttendance.find({studentAttendance})
@@ -29,9 +32,10 @@ const getMultipleStudentAttendance = asyncHandler (async (req, res) => {
 })
 
 //POST Attendance of Student
+//@route POST /api/student-user/attendance
 //@access public
 const postStudentAttendance = asyncHandler (async (req, res) => {
-    const { fullname, subject_code, subject_name, subject_time, subject_instructor } = req.body
+    const { fullname } = req.body
 
     if(!subject_code && !subject_name){
         res.status(400)
@@ -40,20 +44,12 @@ const postStudentAttendance = asyncHandler (async (req, res) => {
 
     const attendance = await studentAttendance.create({
         fullname,
-        subject_code,
-        subject_name,
-        subject_time,
-        subject_instructor,
     })
 
     if(attendance){
         res.status(201).json({
-            _id: subject.id,
+            _id: attendance.id,
             fullname: attendance.fullname,
-            subject_code: attendance.subject_code,
-            subject_name: attendance.subject_name,
-            subject_time: attendance.subject_time,
-            subject_instructor: attendance.subject_instructor,
         })
     } else {
         res.status(400)
@@ -62,6 +58,7 @@ const postStudentAttendance = asyncHandler (async (req, res) => {
 })
 
 //Delete Attendance of Student
+//@route EDIT /api/student-user/attendance/:id
 //@access Public
 const deltStudentAttendance = asyncHandler (async (req, res) => {
     const attendance = await studentAttendance.findById(req.params.id)
@@ -77,6 +74,7 @@ const deltStudentAttendance = asyncHandler (async (req, res) => {
 })
 
 //Delete Multiple Attendance of Student
+//@route GET /api/student-user/attendance/:ids
 //@access Public
 const deltMultiStudentAttendance = asyncHandler (async (req, res) => {
     const attendance = await studentAttendance.findById(req.params.id)

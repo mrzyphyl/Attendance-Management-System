@@ -20,7 +20,6 @@ app.use('/api/professor-user', require('./routes/professorRoutes/professorUserRo
 app.use('/api/student-user/subjects', require('./routes/studentRoutes/studentSubjectRouter'))
 app.use('/api/professor-user/subjects', require('./routes/professorRoutes/professorSubjectRouter'))
 app.use('/api/student-user/attendance', require('./routes/studentRoutes/studentAttendanceRouter'))
-// app.use('/api/professor-user/attendance', require('./routes/professorRoutes/professorAttendanceRouter'))
 
 app.use(errorHandler)
 

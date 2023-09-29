@@ -1,7 +1,9 @@
 const asyncHandler = require('express-async-handler')
 const professorUser = require('../../models/professorModel/professorUserModel')
+const CryptoJS = require('crypto-js')
 
 //Get All Professor User
+//@route GET /api/professor-user
 //@access Public
 const getProfessorUser = asyncHandler (async (req, res) => {
     const user = await professorUser.find({professorUser})
@@ -9,6 +11,7 @@ const getProfessorUser = asyncHandler (async (req, res) => {
 })
 
 //Get One Professor User
+//@route GET /api/professor-user/:id
 //@access Public
 const getOneProfessorUser = asyncHandler (async (req, res) => {
     const profUser = await professorUser.findById(req.params.id)
@@ -22,6 +25,7 @@ const getOneProfessorUser = asyncHandler (async (req, res) => {
 })
 
 //Get Multi Professor User
+//@route GET /api/professor-user/:ids
 //@access Public
 const getMultiProfessorUser = asyncHandler (async (req, res) => {
     const user = await professorUser.find({professorUser})
@@ -29,17 +33,24 @@ const getMultiProfessorUser = asyncHandler (async (req, res) => {
 })
 
 //Login Professor
+//@route POST /api/professor-user/login
 //@access Public
 const loginProfessor = asyncHandler (async (req, res) => {
     let { email, password } = req.body
+    const bytes  = CryptoJS.AES.decrypt(password, 'secret key 123')
+    const originalPass = bytes.toString(CryptoJS.enc.Utf8)
+    
+    const compare = () => {
+        originalPass === password
+    }
 
-    if(!email && !password){
+    if(!email && !compare){
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check if user exist
-    const userExist = await professorUser.findOne({email, password})
+    const userExist = await professorUser.findOne({email, compare})
 
     if(userExist){
         const getUser = await professorUser.findOne(userExist)
@@ -52,6 +63,7 @@ const loginProfessor = asyncHandler (async (req, res) => {
 })
 
 //Post Professor User
+//@route POST /api/professor-user
 //@access Public
 const postProfessorUser = asyncHandler (async (req, res) => {
     const { 
@@ -82,6 +94,8 @@ const postProfessorUser = asyncHandler (async (req, res) => {
         throw new Error('Email already in use')
     }
 
+    const cipher = CryptoJS.AES.encrypt(password, 'secret key 123').toString()
+
     const professor = await professorUser.create({
         firstname,
         middlename,
@@ -94,7 +108,7 @@ const postProfessorUser = asyncHandler (async (req, res) => {
         employee_number,
         department,
         email,
-        password
+        password: cipher
     })
 
     if(professor){
@@ -111,7 +125,7 @@ const postProfessorUser = asyncHandler (async (req, res) => {
             employee_number: professor.employee_number,
             department: professor.department,
             email: professor.email,
-            password: professor.password
+            password: professor.cipher
         })
     } else {
         res.status(400)
@@ -119,7 +133,29 @@ const postProfessorUser = asyncHandler (async (req, res) => {
     }
 })
 
+//Edit Professor User Password
+//@route PUT /api/professor-user/:id
+//@access Public
+const editPassword = asyncHandler (async (req, res) => {
+    //Check if User exist
+    const checkUser = await studentUser.findById(req.params.id)
+
+    if(!checkUser){
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    const cipher = CryptoJS.AES.encrypt(req.body.password, 'secret key 123').toString()
+    const editUserPassword = await studentUser.findByIdAndUpdate(
+        req.params.id,
+        {password: cipher},
+        {new: true}
+    )
+    res.status(200).json(editUserPassword)
+})
+
 //Update Professor User
+//@route PUT /api/professor-user/:id
 //@access Public
 const updateProfessorUser = asyncHandler (async (req, res) => {
     const profUser = await professorUser.findById(req.params.id)
@@ -137,6 +173,7 @@ const updateProfessorUser = asyncHandler (async (req, res) => {
 })
 
 //Delete Professor User
+//@route DELETE /api/professor-user/:id
 //@access Public
 const deltProfessorUser = asyncHandler (async (req, res) => {
     const profUser = await professorUser.findById(req.params.id)
@@ -152,6 +189,7 @@ const deltProfessorUser = asyncHandler (async (req, res) => {
 })
 
 //Delete Multiple Professor User
+//@route DELETE /api/professor-user/:ids
 //@access Public
 const deltMultiProfessorUser = asyncHandler (async (req, res) => {
     const profUser = await professorUser.findById(req.params.id)

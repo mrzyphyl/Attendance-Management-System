@@ -3,6 +3,7 @@ const studentSubjects = require('../../models/studentModel/studentSubjectModel')
 const { subtle } = require('crypto')
 
 //GET All Subjects of Student
+//@route GET /api/student-user/subjects
 //@access public
 const getStudentSubjects = asyncHandler (async (req, res) => {
     const subjects = await studentSubjects.find({studentSubjects})
@@ -10,6 +11,7 @@ const getStudentSubjects = asyncHandler (async (req, res) => {
 })
 
 //GET One Subjects of Student
+//@route GET /api/student-user/subjects/:id
 //@access public
 const getOneStudentSubjects = asyncHandler (async (req, res) => {
     const subjects = await studentSubjects.findById(req.params.id)
@@ -23,6 +25,7 @@ const getOneStudentSubjects = asyncHandler (async (req, res) => {
 })
 
 //GET Multiple Subjects of Student
+//@route GET /api/student-user/subjects/:ids
 //@access public
 const getMultipleStudentSubjects = asyncHandler (async (req, res) => {
     const subjects = await studentSubjects.find({studentSubjects})
@@ -30,6 +33,7 @@ const getMultipleStudentSubjects = asyncHandler (async (req, res) => {
 })
 
 //POST Subjects of Student
+//@route POST /api/student-user/subjects
 //@access public
 const postStudentSubjects = asyncHandler (async (req, res) => {
     const { subject_code, subject_name, subject_time, subject_instructor, student_enrolled } = req.body
@@ -71,6 +75,7 @@ const postStudentSubjects = asyncHandler (async (req, res) => {
 })
 
 //Update Subjects of Student
+//@route PUT /api/student-user/subjects/:id
 //@access Public
 const updateStudentSubjects = asyncHandler (async (req, res) => {
     const subject = await studentSubjects.findById(req.params.id)
@@ -88,6 +93,7 @@ const updateStudentSubjects = asyncHandler (async (req, res) => {
 })
 
 //Delete Subject of Student
+//@route DELETE /api/student-user/subjects/:id
 //@access Public
 const deltStudentSubject = asyncHandler (async (req, res) => {
     const subject = await studentSubjects.findById(req.params.id)
@@ -103,6 +109,7 @@ const deltStudentSubject = asyncHandler (async (req, res) => {
 })
 
 //Delete Multiple Subjects of Student
+//@route DELETE /api/student-user/subjects/:ids
 //@access Public
 const deltMultiStudentSubjects = asyncHandler (async (req, res) => {
     const subject = await studentSubjects.findById(req.params.id)
