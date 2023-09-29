@@ -4,7 +4,6 @@ import UpangLogo from '../../../assets/Logo/Upang Logo no bg.png'
 import { 
     AiFillFacebook, 
     AiFillTwitterCircle, 
-    AiFillGoogleCircle, 
     AiFillRedditCircle, 
     AiFillLinkedin,
     AiFillGithub
