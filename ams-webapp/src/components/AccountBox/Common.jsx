@@ -201,5 +201,5 @@ export const CancelLink = styled.a `
     width: 30%;
     height: 3.5rem;
     color: #fff;
-    text-decoration:none
+    text-decoration: none
 `

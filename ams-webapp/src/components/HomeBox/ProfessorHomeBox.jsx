@@ -6,6 +6,7 @@ import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no b
 import { Modal } from '../Modal/Modal'
 import { Marginer } from '../Marginer/Margin'
 import Card from './Card'
+import Footer from '../Navs/Footer/Footer'
 
 
 function ProfessorHomeBox() {
@@ -57,6 +58,7 @@ function ProfessorHomeBox() {
             <Card/>
           </CardContainer>
         </CardBox>
+        <Footer/>
       </Box>
     </Box>
   )

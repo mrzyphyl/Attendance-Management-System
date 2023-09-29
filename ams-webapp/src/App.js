@@ -11,6 +11,7 @@ import StudentSettings from './pages/SettingsPage/StudentSettings'
 import ProfessorSettings from './pages/SettingsPage/ProfessorSettings'
 import StudentClass from './pages/ClassPage/StudentClass'
 import ProfessorClass from './pages/ClassPage/ProfessorClass';
+import SecretPage from './pages/SecretPage/SecretPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/professor-settings' exact element={<ProfessorSettings/>}/>
         <Route path='/student-classes' exact element={<StudentClass/>}/>
         <Route path='/professor-classes' exact element={<ProfessorClass/>}/>
+        <Route path='/upanget' exact element={<SecretPage/>}/>
       </Routes>
     </>
   );

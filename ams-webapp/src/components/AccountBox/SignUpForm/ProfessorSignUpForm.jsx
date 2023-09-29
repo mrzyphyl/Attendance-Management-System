@@ -112,7 +112,7 @@ export function ProfSignUpForm () {
                         <SignUpFormContainer>
                             <Input 
                             type='number' 
-                            inputmode="numeric" 
+                            inputMode="numeric" 
                             placeholder='Employee Number'
                             value={employee_number}
                             onChange={(e) => setEmployee_Number(e.target.value)}/>
