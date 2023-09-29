@@ -1,15 +1,15 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { AboutContent, AboutHeader, AboutHeaderContainer, AboutHeaderContent, AboutImage, AboutImageBox, AboutImageContainer, AboutImageContent, AboutInfo, AboutParagraph, AboutParagraphBox, AboutParagraphContent, WelcomeHeader } from '../AboutBox/Common'
+import StudentSidebar from '../../Navs/Sidebar/StudentSidebar'
+import { AboutContent, AboutHeader, AboutHeaderContainer, AboutHeaderContent, AboutImage, AboutImageBox, AboutImageContainer, AboutImageContent, AboutInfo, AboutParagraph, AboutParagraphBox, AboutParagraphContent, WelcomeHeader } from '../Common'
 import styled from 'styled-components'
-import ContactUs from './ContactUs'
+import ContactUs from '../ContactUs'
 
 
-function AboutUs() {
+function AboutUsStudent() {
   return (
     <Box sx={{ display: 'flex' }}>
-      <ProfessorSideBar/>
+      <StudentSidebar/>
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
         <AboutContent>
           <AboutHeaderContent>
@@ -337,4 +337,4 @@ const SocialMediaList = styled.li`
   display: inline-block;
 `
 
-export default AboutUs
+export default AboutUsStudent

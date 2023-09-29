@@ -14,11 +14,27 @@ export function LoginForm(){
     const navigate = useNavigate()
   
     const onSubmit = (e) => {
-      e.preventDefault();
-      axios.post('http://localhost:5000/api/professor-user/login', { email, password })
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
-      navigate("/")
+        e.preventDefault();
+  
+        // Send a request to the student login endpoint
+        axios.post('http://localhost:5000/api/student-user/login', { email, password })
+          .then(studentResult => {
+            console.log('Student Login:', studentResult);
+            navigate('/student-home')
+          })
+          .catch(studentErr => {
+            console.log('Student Login Error:', studentErr);
+          });
+      
+        // Send a request to the professor login endpoint
+        axios.post('http://localhost:5000/api/professor-user/login', { email, password })
+          .then(professorResult => {
+            console.log('Professor Login:', professorResult);
+            navigate('/professor-home')
+          })
+          .catch(professorErr => {
+            console.log('Professor Login Error:', professorErr);
+          });
     }
     return(
         <BoxContainer>

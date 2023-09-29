@@ -5,7 +5,9 @@ import StudentSignUp from './pages/SignUpPage/StudentSignUp';
 import ProfessorSignUp from './pages/SignUpPage/ProfessorSignUp';
 import StudentHome from './pages/HomePage/StudentHome'
 import ProfessorHome from './pages/HomePage/ProfessorHome'
-import About from './pages/AboutPage/About'
+import AboutS from './pages/AboutPage/AboutS'
+import AboutP from './pages/AboutPage/AboutP'
+
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
         <Route path='/professor-sign-up' exact element={<ProfessorSignUp/>}/>
         <Route path='/student-home' exact element={<StudentHome/>}/>
         <Route path='/professor-home' exact element={<ProfessorHome/>}/>
-        <Route path='/about-us' exact element={<About/>}/>
+        <Route path='/about-us-s' exact element={<AboutS/>}/>
+        <Route path='/about-us-p' exact element={<AboutP/>}/>
       </Routes>
     </>
   );

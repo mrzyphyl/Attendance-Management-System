@@ -200,7 +200,7 @@ export default function StudentSideBar() {
                         </ListItemButton>
                     </ListItem>
                     <Divider />
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate("/about-us")}}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate("/about-us-s")}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,

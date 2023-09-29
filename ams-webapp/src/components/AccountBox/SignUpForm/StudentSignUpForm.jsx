@@ -113,7 +113,7 @@ export function StudSignUpForm () {
                             <Input 
                             type='number' 
                             inputmode="numeric" 
-                            placeholder='Employee Number'
+                            placeholder='Student Number'
                             value={student_number}
                             onChange={(e) => setStudent_Number(e.target.value)}/>
 

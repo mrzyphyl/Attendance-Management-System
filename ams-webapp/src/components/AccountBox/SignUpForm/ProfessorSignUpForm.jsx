@@ -113,7 +113,7 @@ export function ProfSignUpForm () {
                             <Input 
                             type='number' 
                             inputmode="numeric" 
-                            placeholder='Student Number'
+                            placeholder='Employee Number'
                             value={employee_number}
                             onChange={(e) => setEmployee_Number(e.target.value)}/>
 
