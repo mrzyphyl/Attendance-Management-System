@@ -5,6 +5,7 @@ import { AboutContent, AboutHeader, AboutHeaderContainer, AboutHeaderContent, Ab
 import styled from 'styled-components'
 import ContactUs from '../ContactUs'
 import { Marginer } from '../../Marginer/Margin'
+import Footer from '../../Navs/Footer/Footer'
 
 
 function AboutUsStudent() {
@@ -326,6 +327,8 @@ function AboutUsStudent() {
         <ContactUsContent>
           <ContactUs/>
         </ContactUsContent>
+        <Marginer direction="vertical" margin={'1px'}/>
+        <Footer/>
       </Box>
     </Box>
   )

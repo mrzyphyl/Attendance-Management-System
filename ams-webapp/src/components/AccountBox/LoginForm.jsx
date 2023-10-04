@@ -19,17 +19,19 @@ export function LoginForm(){
         // Send a request to the student login endpoint
         axios.post('http://localhost:5000/api/student-user/login', { email, password })
           .then(studentResult => {
-            console.log('Student Login:', studentResult);
+            console.log('Student Login:', studentResult.data)
+            const userId = studentResult.data._id;
+            localStorage.setItem('userId', userId);
             navigate('/student-home')
           })
           .catch(studentErr => {
-            console.log('Student Login Error:', studentErr);
+            console.log('Student Login Error:', studentErr)
           });
       
         // Send a request to the professor login endpoint
         axios.post('http://localhost:5000/api/professor-user/login', { email, password })
           .then(professorResult => {
-            console.log('Professor Login:', professorResult);
+            console.log('Professor Login:', professorResult.data);
             navigate('/professor-home')
           })
           .catch(professorErr => {
