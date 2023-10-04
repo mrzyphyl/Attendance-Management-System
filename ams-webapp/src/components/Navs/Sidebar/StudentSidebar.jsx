@@ -114,8 +114,8 @@ export default function StudentSideBar() {
         window.location.href = "/"
     }
 
-    const [user, setUser] = useState([]);
-    const userId = localStorage.getItem('userId'); // Get the userId from localStorage
+    const [user, setUser] = useState([])
+    const userId = localStorage.getItem('userId')
 
     useEffect(() => {
         axios.get(`http://localhost:5000/api/student-user/${userId}`)

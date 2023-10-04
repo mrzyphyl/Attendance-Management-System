@@ -10,7 +10,7 @@ function ProfessorProfileSettings() {
   const {id} = useParams()
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/professor-user' + id)
+    axios.get('http://localhost:5000/api/professor-user/' + id)
     .then(response => {
       setUserData(response.data)
     })
@@ -35,7 +35,7 @@ function ProfessorProfileSettings() {
                 <UserInformationBox>
                   <UserInfo>
                     <Label>Name</Label>
-                    <Info>{userData?.firstname}{userData?.middlename}{userData?.lastname} </Info>
+                    <Info>{userData?.lastname}, {userData?.firstname} {userData?.middlename}</Info>
                   </UserInfo>
                   <UserInfo>
                     <Label>Age</Label>

@@ -115,12 +115,13 @@ export default function ProfessorSideBar() {
     }
 
     const [user, setUser] = useState([])
+    const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/professor-user')
-    .then(result => setUser(result.data))
-    .catch(err => console.log(err))
-    }, [])
+        axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+        .then(result => setUser(result.data))
+        .catch(err => console.log(err))
+    }, [userId])
 
     return (
         <Box sx={{ display: 'flex' }}>

@@ -35,7 +35,7 @@ function StudentProfileSettings() {
                 <UserInformationBox>
                   <UserInfo>
                     <Label>Name</Label>
-                    <Info>{userData?.firstname} {userData?.middlename} {userData?.lastname} </Info>
+                    <Info>{userData?.lastname}, {userData?.firstname} {userData?.middlename}</Info>
                   </UserInfo>
                   <UserInfo>
                     <Label>Age</Label>
