@@ -21,7 +21,9 @@ export function LoginForm(){
           .then(studentResult => {
             console.log('Student Login:', studentResult.data)
             const userId = studentResult.data._id
+            const userData = studentResult.data
             localStorage.setItem('userId', userId)
+            localStorage.setItem('userData', userData)
             navigate('/student-home')
           })
           .catch(studentErr => {
@@ -33,7 +35,9 @@ export function LoginForm(){
           .then(professorResult => {
             console.log('Professor Login:', professorResult.data)
             const userId = professorResult.data._id
+            const userData = professorResult.data
             localStorage.setItem('userId', userId)
+            localStorage.setItem('userData', userData)
             navigate('/professor-home')
           })
           .catch(professorErr => {
