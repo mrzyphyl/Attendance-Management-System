@@ -213,5 +213,6 @@ module.exports = {
     updateProfessorUser,
     deltProfessorUser,
     deltMultiProfessorUser,
-    loginProfessor
+    loginProfessor,
+    editPassword
 }

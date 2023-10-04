@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { HeaderContainer, HeaderText, ImageContainer, Info, Label, ProfileContainer, ProfileImage, SettingsBox, SettingsContainer, UserInfo, UserInfoContainer, UserInformationBox } from './Common'
+import { ButtonBox, HeaderContainer, HeaderText, ImageContainer, Info, Label, ProfileContainer, ProfileImage, SettingsBox, SettingsContainer, SubmitButton, UserInfo, UserInfoContainer, UserInformationBox } from './Common'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
@@ -78,6 +78,10 @@ function ProfessorProfileSettings() {
                     <Info>{userData?.email}</Info>
                   </UserInfo>
                 </UserInformationBox>
+                <ButtonBox>
+                  <SubmitButton>Edit Profile</SubmitButton>
+                  <SubmitButton>Change Password</SubmitButton>
+                </ButtonBox>
               </UserInfoContainer>
             </ProfileContainer>
           </SettingsBox>

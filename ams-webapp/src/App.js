@@ -12,6 +12,10 @@ import ProfessorSettings from './pages/SettingsPage/ProfessorSettings'
 import StudentClass from './pages/ClassPage/StudentClass'
 import ProfessorClass from './pages/ClassPage/ProfessorClass';
 import SecretPage from './pages/SecretPage/SecretPage';
+import StudentChangePass from './pages/SettingsPage/ChangePasswordPage/StudentChangePass'
+import ProfessorChangePass from './pages/SettingsPage/ChangePasswordPage/ProfessorChangePass'
+import EditStudent from './pages/SettingsPage/EditInfoPage/EditStudent'
+import EditProfessor from './pages/SettingsPage/EditInfoPage/EditProfessor'
 
 
 function App() {
@@ -30,6 +34,10 @@ function App() {
         <Route path='/professor-settings/:id' exact element={<ProfessorSettings/>}/>
         <Route path='/student-classes' exact element={<StudentClass/>}/>
         <Route path='/professor-classes' exact element={<ProfessorClass/>}/>
+        <Route path='/student-changepass' exact element={<StudentChangePass/>}/>
+        <Route path='/professor-changepass' exact element={<ProfessorChangePass/>}/>
+        <Route path='/student-editprofile' exact element={<EditStudent/>}/>
+        <Route path='/professor-editprofile' exact element={<EditProfessor/>}/>
         <Route path='/upanget' exact element={<SecretPage/>}/>
       </Routes>
     </>

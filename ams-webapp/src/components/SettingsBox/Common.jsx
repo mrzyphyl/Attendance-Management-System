@@ -110,6 +110,49 @@ export const Label = styled.label`
 `
 
 export const Info = styled.p`
+    text-align: center;
     font-size: 20px;
     font-weight: 200;
+`
+
+export const SubmitButton = styled.button `
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+    padding: 11px;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all, 240ms ease-in-out;
+    background: rgb(241, 196, 15);
+    background: linear-gradient(
+    58deg,
+    rgba(241, 196, 15, 1) 20%,
+    rgba(243, 172, 18, 1) 100%
+    );
+    &:hover {
+    filter: brightness(1.03);
+    }
+
+    @media ${devices.tablet} {
+        width: 40%;
+    }
+`
+
+export const ButtonBox = styled.div`
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    @media ${devices.tablet} {
+        flex-direction: row;
+    }
 `
