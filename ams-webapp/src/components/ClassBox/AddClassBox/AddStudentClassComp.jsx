@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import StudentSidebar from '../Navs/Sidebar/StudentSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAddedBox, ClassBox, ClassContainer } from './Common'
-import { IoMdAddCircle } from 'react-icons/io'
-import axios from 'axios'
+import StudentSidebar from '../../Navs/Sidebar/StudentSidebar'
+import { AddClassBox, AddClassHeader, AddClassHeaderContainer, ClassBox, ClassContainer } from '../Common'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-function StudentClasses() {
+function AddStudentClassComp() {
   const navigate = useNavigate()
-
   const [user, setUser] = useState([])
   const [subjects, setSubjects] = useState([])
   const userId = localStorage.getItem('userId')
@@ -37,12 +35,10 @@ function StudentClasses() {
         <ClassContainer>
           <ClassBox>
             <AddClassBox>
-              <AddClass onClick={() => {navigate('/add-student-classes')}}>
-                <AddClassText><IoMdAddCircle/>Add Class</AddClassText>
-              </AddClass>
+              <AddClassHeaderContainer>
+                <AddClassHeader>Enroll to a Subject</AddClassHeader>
+              </AddClassHeaderContainer>
             </AddClassBox>
-            <ClassAddedBox>
-            </ClassAddedBox>
           </ClassBox>
         </ClassContainer>
       </Box>
@@ -50,4 +46,4 @@ function StudentClasses() {
   )
 }
 
-export default StudentClasses
+export default AddStudentClassComp

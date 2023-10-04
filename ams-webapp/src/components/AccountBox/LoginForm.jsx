@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { styled } from "styled-components";
-import { BoldLink, BoxContainer, FormContainer, Input, MutedLink, SubmitButton, SubmitLink, HeaderContainer, HeaderText} from './Common';
+import { BoldLink, BoxContainer, FormContainer, Input, MutedLink, SubmitButton, SubmitLink, HeaderContainer, HeaderText, Error} from './Common';
 import LogoNoBG from '../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { Marginer } from '../Marginer/Margin';
 import { devices } from '../Device/DeviceSizes';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export function LoginForm(){
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [loginError, setLoginError] = useState('')
   
     const navigate = useNavigate()
   
@@ -28,6 +29,11 @@ export function LoginForm(){
           })
           .catch(studentErr => {
             console.log('Student Login Error:', studentErr)
+            if (studentErr.response && studentErr.response.status === 400) {
+                setLoginError('Invalid email or password');
+            } else {
+                setLoginError('An error occurred. Please try again.');
+            }
           });
       
         // Send a request to the professor login endpoint
@@ -41,7 +47,12 @@ export function LoginForm(){
             navigate('/professor-home')
           })
           .catch(professorErr => {
-            console.log('Professor Login Error:', professorErr);
+            console.log('Professor Login Error:', professorErr)
+            if (professorErr.response && professorErr.response.status === 400) {
+                setLoginError('Invalid email or password');
+            } else {
+                setLoginError('An error occurred. Please try again.');
+            }
           });
     }
     return(
@@ -64,6 +75,9 @@ export function LoginForm(){
                 placeholder='Password'
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}/>
+                <Marginer direction="vertical" margin={5} />
+                {/* Error message */}
+                {loginError && <Error>{loginError}</Error>}
                 <Marginer direction="vertical" margin={5} />
                 <MutedLink href="#">Forget your password?</MutedLink>
                 <Marginer direction="vertical" margin="1.6em" />

@@ -34,6 +34,7 @@ export const MutedLink = styled.a `
 `
 
 export const BoldLink = styled.a `
+    text-align: center;
     font-size: 12px;
     color: rgb(241, 196, 15);
     font-weight: 500;
@@ -202,4 +203,10 @@ export const CancelLink = styled.a `
     height: 3.5rem;
     color: #fff;
     text-decoration: none
+`
+
+export const Error = styled.p`
+    text-align: center;
+    color: rgb(239, 68, 68);
+    margin-top: 2.25rem;
 `

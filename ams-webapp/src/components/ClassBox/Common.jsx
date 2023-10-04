@@ -73,3 +73,23 @@ export const ClassAddedBox = styled.div`
     background: #ebe8e8;
     box-shadow: inset 0px 0px 35px 0px rgba(145, 142, 142, 0.24);
 `
+
+export const AddClassHeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    width: 100%;
+    @media ${devices.tablet} {
+        justify-content: start;
+    }
+`
+
+export const AddClassHeader = styled.h2`
+    font-size: 20px;
+    font-weight: 600;
+
+    @media ${devices.tablet} {   
+        font-size: 30px;
+    }
+`

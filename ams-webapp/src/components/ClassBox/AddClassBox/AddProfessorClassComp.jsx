@@ -1,25 +1,20 @@
-import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAddedBox, ClassBox, ClassContainer } from './Common'
-import { IoMdAddCircle } from 'react-icons/io'
-import axios from 'axios'
+import { Box } from '@mui/material'
+import ProfessorSideBar from '../../Navs/Sidebar/ProfessorSidebar'
+import { AddClassBox, ClassBox, ClassContainer, AddClassHeader, AddClassHeaderContainer } from '../Common'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-function ProfessorClasBox() {
+function AddProfessorClassComp() {
   const navigate = useNavigate()
-
   const [user, setUser] = useState([])
   const [subjects, setSubjects] = useState([])
   const userId = localStorage.getItem('userId')
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
-    .then(result => {
-      setUser(result.data)
-      console.log(result)
-    })
-    .catch(err => console.log(err))
+      axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+      .then(result => setUser(result.data))
+      .catch(err => console.log(err))
   }, [userId])
 
   useEffect(() => {
@@ -30,7 +25,6 @@ function ProfessorClasBox() {
     })
     .catch(err => console.log(err))
   })
-
   return (
     <Box sx={{ display: 'flex' }}>
       <ProfessorSideBar/>
@@ -38,12 +32,10 @@ function ProfessorClasBox() {
         <ClassContainer>
           <ClassBox>
             <AddClassBox>
-              <AddClass onClick={() => {navigate('/add-professor-classes')}}>
-                <AddClassText><IoMdAddCircle/>Add Class</AddClassText>
-              </AddClass>
+              <AddClassHeaderContainer>
+                <AddClassHeader>Add a Subject</AddClassHeader>
+              </AddClassHeaderContainer>
             </AddClassBox>
-            <ClassAddedBox>
-            </ClassAddedBox>
           </ClassBox>
         </ClassContainer>
       </Box>
@@ -51,4 +43,4 @@ function ProfessorClasBox() {
   )
 }
 
-export default ProfessorClasBox
+export default AddProfessorClassComp
