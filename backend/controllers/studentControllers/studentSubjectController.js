@@ -36,19 +36,19 @@ const getMultipleStudentSubjects = asyncHandler (async (req, res) => {
 //@route POST /api/student-user/subjects
 //@access public
 const postStudentSubjects = asyncHandler (async (req, res) => {
-    const { subject_code, subject_name, subject_time, subject_instructor, student_enrolled } = req.body
+    const { subject_code, subject_name, subject_time, subject_instructor, department, student_enrolled } = req.body
 
-    if(!subject_code && !subject_name){
+    if(!subject_code || !subject_name || !subject_time){
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check if subject time exist
-    const timeExist = await studentSubjects.findOne({subject_time})
+    const timeExist = await studentSubjects.findOne({subject_time, subject_code, subject_name})
 
     if(timeExist){
         res.status(400)
-        throw new Error('There is already subject on that time')
+        throw new Error('You already have a same subject on that time')
     }
 
     const subject = await studentSubjects.create({
@@ -56,7 +56,8 @@ const postStudentSubjects = asyncHandler (async (req, res) => {
         subject_name,
         subject_time,
         subject_instructor,
-        student_enrolled
+        student_enrolled,
+        department
     })
 
     if(subject){
@@ -66,7 +67,8 @@ const postStudentSubjects = asyncHandler (async (req, res) => {
             subject_name: subject.subject_name,
             subject_time: subject.subject_time,
             subject_instructor: subject.subject_instructor,
-            student_enrolled: subject.student_enrolled
+            student_enrolled: subject.student_enrolled,
+            department: subject.department
         })
     } else {
         res.status(400)

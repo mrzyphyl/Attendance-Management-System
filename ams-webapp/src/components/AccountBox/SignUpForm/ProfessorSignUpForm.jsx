@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { styled } from 'styled-components'
-import { CancelButton, CancelLink, HeaderText, Input, SignUpBoxContainer, SignUpContainer, SignUpFormBoxContainer, SignUpFormContainer, SignUpScrollableContent } from '../Common'
+import { CancelButton, CancelLink, HeaderText, Input, Select, SignUpBoxContainer, SignUpContainer, SignUpFormBoxContainer, SignUpFormContainer, SignUpScrollableContent } from '../Common'
 import { Marginer } from '../../Marginer/Margin'
 import { devices } from '../../Device/DeviceSizes'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ export function ProfSignUpForm () {
     const [ address, setAddress ] = useState()
     const [ user_status, setUser_Status ] = useState()
     const [ employee_number, setEmployee_Number ] = useState()
-    const [ department, setDepartment ] = useState()
+    const [ department, setDepartment ] = useState('CITE')
     const [ email, setEmail ] = useState()
     const [ password, setPassword ] = useState()
 
@@ -38,7 +38,11 @@ export function ProfSignUpForm () {
             email, 
             password  
         })
-        .then(result => console.log(result))
+        .then(result => {
+            console.log('Professor Data:', result.data)
+            const userId = result.data._id
+            localStorage.setItem('userId', userId)
+        })
         .catch(err => console.log(err))
         navigate("/professor-home")
     }
@@ -117,10 +121,18 @@ export function ProfSignUpForm () {
                             value={employee_number}
                             onChange={(e) => setEmployee_Number(e.target.value)}/>
 
-                            <Input 
-                            type='text' 
-                            placeholder='Department'
-                            onChange={(e) => setDepartment(e.target.value)}/>
+                            <Select 
+                            value={department} 
+                            onChange={(e) => setDepartment(e.target.value)}
+                            >
+                                <option value='CITE'>CITE</option>
+                                <option value='CELA'>CELA</option>
+                                <option value='CEA'>CEA</option>
+                                <option value='CSS'>CSS</option>
+                                <option value='CMA'>CMA</option>
+                                <option value='CHS'>CHS</option>
+                                <option value='CAS'>CAS</option>
+                            </Select>
 
                         </SignUpFormContainer>
                         <Marginer direction="vertical" margin={'1.5em'}/>

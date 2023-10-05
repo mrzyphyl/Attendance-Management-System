@@ -17,6 +17,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add your Subject Instructor']
     },
+    department: {
+        type: String,
+        required: [true, 'Please add your Subject Instructor']
+    },
     student_enrolled: {
         type: String,
         required: [true, 'Please add your Enrolled Student']

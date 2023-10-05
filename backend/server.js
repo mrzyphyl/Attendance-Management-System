@@ -19,6 +19,7 @@ app.use('/api/student-user', require('./routes/studentRoutes/studentUserRouter')
 app.use('/api/professor-user', require('./routes/professorRoutes/professorUserRouter'))
 app.use('/api/student/subjects', require('./routes/studentRoutes/studentSubjectRouter'))
 app.use('/api/professor/subjects', require('./routes/professorRoutes/professorSubjectRouter'))
+app.use('/api/professor/search-subjects', require('./routes/professorRoutes/professorSearchSubjectRouter'))
 app.use('/api/student-user/attendance', require('./routes/studentRoutes/studentAttendanceRouter'))
 
 app.use(errorHandler)

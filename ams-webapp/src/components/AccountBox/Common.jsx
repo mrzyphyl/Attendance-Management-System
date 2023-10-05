@@ -65,6 +65,30 @@ export const Input = styled.input `
     }
 `
 
+export const Select = styled.select `
+    width: 80%;
+    height: 50px;
+    outline: none;
+    border: 1.5px solid rgba(44, 43, 43, 0.1);
+    padding: 0px 10px;
+    transition: all 200ms ease-in-out;
+    font-size: 12px;
+    font-weight: 500;
+
+    &::placeholder {
+    color: black;
+    }
+
+    &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+    }
+
+    &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+    }
+`
+
 export const SubmitButton = styled.button `
     display: flex;
     align-items: center;

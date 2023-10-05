@@ -36,18 +36,18 @@ const getMultipleProfessorSubjects = asyncHandler (async (req, res) => {
 //@route POST /api/professor-user/subjects
 //@access public
 const postProfessorSubjects = asyncHandler (async (req, res) => {
-    const { subject_code, subject_name, subject_time, subject_instructor } = req.body
+    const { subject_code, subject_name, subject_time, subject_instructor, department } = req.body
 
-    if(!subject_code && !subject_name){
+    if(!subject_code || !subject_name || !subject_time){
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check if subject time exist
-    const timeExist = await professorSubjects.findOne({subject_time})
+    const timeExist = await professorSubjects.findOne({subject_time, subject_code, subject_name, department})
 
     if(timeExist){
-        res.status(400)
+        res.status(401)
         throw new Error('There is already subject on that time')
     }
 
@@ -55,7 +55,8 @@ const postProfessorSubjects = asyncHandler (async (req, res) => {
         subject_code,
         subject_name,
         subject_time,
-        subject_instructor
+        subject_instructor,
+        department
     })
 
     if(subject){
@@ -64,7 +65,8 @@ const postProfessorSubjects = asyncHandler (async (req, res) => {
             subject_code: subject.subject_code,
             subject_name: subject.subject_name,
             subject_time: subject.subject_time,
-            subject_instructor: subject.subject_instructor
+            subject_instructor: subject.subject_instructor,
+            department: subject.department
         })
     } else {
         res.status(400)
@@ -122,6 +124,25 @@ const deltMultiSubjects = asyncHandler (async (req, res) => {
     res.status(200).json({ id: req.params.id})
 })
 
+//Search Departments
+//@route GET /api/professor-user/subjects/department
+//@access Public
+const findDepartments = asyncHandler(async (req, res) => {
+    const { department } = req.query
+
+    if (!department) {
+        res.status(400)
+        throw new Error('Please add a field')
+    }
+
+    try {
+        const departments = await professorSubjects.find({ department })
+        res.status(200).json(departments)
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching departments' })
+    }
+})
+
 module.exports = {
     getProfessorSubjects,
     getOneProfessorSubjects,
@@ -129,5 +150,6 @@ module.exports = {
     postProfessorSubjects,
     updateSubjects,
     deltSubject,
-    deltMultiSubjects
+    deltMultiSubjects,
+    findDepartments
 }

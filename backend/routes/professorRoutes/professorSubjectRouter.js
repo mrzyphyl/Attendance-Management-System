@@ -6,7 +6,7 @@ const {
     updateSubjects, 
     deltSubject, 
     deltMultiSubjects, 
-    getMultipleProfessorSubjects 
+    getMultipleProfessorSubjects, 
 } = require('../../controllers/professorControllers/professorSubjectController')
 const router = express.Router()
 

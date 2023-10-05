@@ -25,8 +25,13 @@ export const ClassBox = styled.div`
 export const AddClassBox = styled.div`
     width: 100%;
     display: flex;
-    align-items: end;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media ${devices.tablet} {
+        align-items: end;
+        justify-content: flex-end;
+    }
 `
 
 export const AddClass = styled.button`
@@ -36,16 +41,17 @@ export const AddClass = styled.button`
     align-items: center;
     justify-content: center;
     height: 20px;
-    width: 100%;
+    width: 80%;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    margin: 20px 20px 20px;
+    margin-top: 5px;
     text-align: center;
     background: #0e796cb2;
 
     @media ${devices.tablet} {
         width: 20%;
         padding-bottom: 2.5rem;
+        margin: 20px 20px 20px;
     }
 `
 
@@ -78,7 +84,6 @@ export const AddClassHeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1rem;
     width: 100%;
     @media ${devices.tablet} {
         justify-content: start;
@@ -86,10 +91,166 @@ export const AddClassHeaderContainer = styled.div`
 `
 
 export const AddClassHeader = styled.h2`
+    margin-left: 0;
     font-size: 20px;
     font-weight: 600;
 
     @media ${devices.tablet} {   
         font-size: 30px;
+        margin-left: 2rem;
+    }
+`
+
+export const CreateClassBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+`
+
+export const CreateClassForm = styled.form`
+    position: relative;
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+`
+
+export const Input = styled.input `
+    width: 97%;
+    height: 50px;
+    outline: none;
+    border: 1.5px solid rgba(44, 43, 43, 0.1);
+    padding: 0px 10px;
+    transition: all 200ms ease-in-out;
+    font-size: 15px;
+    font-weight: 500;
+
+    &::placeholder {
+    color: black;
+    }
+
+    &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+    }
+
+    &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+    }
+
+    @media ${devices.tablet} {
+      width: 80%;
+      font-size: 20px;
+    }
+`
+
+export const CancelButton = styled.button `
+display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: rgb(216, 59, 59);
+    background: linear-gradient(
+    58deg,
+    #db4949 20%,
+    #e40d0d 100%
+    );
+    &:hover {
+    filter: brightness(1.03);
+    }
+
+    @media ${devices.mobileL} {
+        font-size: 20px;
+    }
+`
+
+export const CancelLink = styled.a `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 3.5rem;
+    color: #fff;
+    text-decoration: none
+`
+
+export const ButtonType = styled.button `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: rgb(241, 196, 15);
+    background: linear-gradient(
+    58deg,
+    rgba(241, 196, 15, 1) 20%,
+    rgba(243, 172, 18, 1) 100%
+    );
+    &:hover {
+    filter: brightness(1.03);
+    }
+
+    @media ${devices.mobileL} {
+        font-size: 20px;
+    }
+`
+
+export const ButtonSubmit = styled.a `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 3.5rem;
+    color: #fff;
+    text-decoration:none
+`
+
+export const Select = styled.select `
+    width: 97%;
+    height: 50px;
+    outline: none;
+    border: 1.5px solid rgba(44, 43, 43, 0.1);
+    padding: 0px 10px;
+    padding-right: 1rem;
+    transition: all 200ms ease-in-out;
+    font-size: 15px;
+    font-weight: 500;
+
+    &::placeholder {
+    color: black;
+    }
+
+    &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+    }
+
+    &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+    }
+
+    @media ${devices.tablet} {
+      width: 80%;
+      font-size: 20px;
     }
 `
