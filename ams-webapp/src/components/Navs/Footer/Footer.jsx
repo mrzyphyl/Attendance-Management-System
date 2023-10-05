@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import UpangLogo from '../../../assets/Logo/Upang Logo no bg.png'
+import Logo from '../../../assets/Logo/Attendance Management System-Mobile no bg.png'
 import { 
     AiFillFacebook, 
     AiFillTwitterCircle, 
@@ -13,7 +13,7 @@ function Footer() {
   return (
     <FooterBox>
         <ImageContainer>
-            <LogoImage src={UpangLogo} alt='Upang Logo'/>
+            <LogoImage src={Logo} alt='Upang Logo'/>
         </ImageContainer>
         <TextContainer>
             <Text>© 2023 Techo Buddies</Text>
@@ -65,11 +65,12 @@ const ImageContainer = styled.div`
 `
 
 const LogoImage = styled.img`
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 `
 
 const TextContainer = styled.div`
+    margin-top: -50px;
     display: flex;
     flex-direction: column;
     align-items: center;
