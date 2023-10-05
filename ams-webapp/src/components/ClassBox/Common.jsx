@@ -22,6 +22,14 @@ export const ClassBox = styled.div`
     }
 `
 
+export const AddClassContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
 export const AddClassBox = styled.div`
     width: 100%;
     display: flex;

@@ -38,7 +38,7 @@ const getMultipleProfessorSubjects = asyncHandler (async (req, res) => {
 const postProfessorSubjects = asyncHandler (async (req, res) => {
     const { subject_code, subject_name, subject_time, subject_instructor, department } = req.body
 
-    if(!subject_code || !subject_name || !subject_time){
+    if(!subject_code && !subject_name && !subject_time){
         res.status(400)
         throw new Error('Please add all fields')
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import ProfessorSideBar from '../../Navs/Sidebar/ProfessorSidebar'
-import { AddClassBox, ClassBox, ClassContainer, AddClassHeader, AddClassHeaderContainer, CreateClassBox, CreateClassForm, Input, ButtonSubmit, ButtonType, CancelLink, CancelButton, Select } from '../Common'
+import { AddClassBox, ClassBox, ClassContainer, AddClassHeader, AddClassHeaderContainer, CreateClassBox, CreateClassForm, Input, ButtonSubmit, ButtonType, CancelLink, CancelButton, Select, AddClassContainer } from '../Common'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -75,7 +75,7 @@ function AddProfessorClassComp() {
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
         <ClassContainer>
           <ClassBox>
-            <AddClassBox>
+            <AddClassContainer>
               <AddClassHeaderContainer>
                 <AddClassHeader>Add a Subject</AddClassHeader>
               </AddClassHeaderContainer>
@@ -131,7 +131,7 @@ function AddProfessorClassComp() {
                   </CancelLink>
                 </CreateClassForm>
               </CreateClassBox>
-            </AddClassBox>
+            </AddClassContainer>
           </ClassBox>
         </ClassContainer>
       </Box>
