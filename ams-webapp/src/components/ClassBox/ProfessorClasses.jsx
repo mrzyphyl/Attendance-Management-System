@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer } from './Common'
+import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes, HeadingContainer } from './Common'
 import { IoMdAddCircle } from 'react-icons/io'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,13 @@ function ProfessorClasBox() {
 
   const [user, setUser] = useState([])
   const [subjects, setSubjects] = useState([])
+
   const userId = localStorage.getItem('userId')
+
+  const filteredSubjects = subjects.filter(subject => {
+    const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
+    return subject.subject_instructor === fullName
+  })
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/professor-user/${userId}`)
@@ -40,20 +46,23 @@ function ProfessorClasBox() {
         <ClassContainer>
           <ClassBox>
             <AddClassBox>
+              <HeadingContainer>
+                <h1>Your Classes</h1>
+              </HeadingContainer>
               <AddClass onClick={() => {navigate('/add-professor-classes')}}>
                 <AddClassText><IoMdAddCircle/>Add Class</AddClassText>
               </AddClass>
             </AddClassBox>
-            <ClassAddedBox>
-              <ClassAdded>
-                <ul>
-                  {subjects.map((subject) => (
-                    <li key={subject._id}>
-                      {subject.subject_name} - {subject.subject_code}
-                    </li>
-                  ))}
-                </ul>
-              </ClassAdded>
+            <ClassAddedBox>         
+              {filteredSubjects.map((subject) => (
+                <ClassAdded key={subject._id}>
+                  <Classes>
+                    <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
+                    <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
+                    <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>
+                  </Classes>
+                </ClassAdded>
+              ))}
             </ClassAddedBox>
           </ClassBox>
         </ClassContainer>

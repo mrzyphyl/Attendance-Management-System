@@ -18,6 +18,8 @@ import EditStudent from './pages/SettingsPage/EditInfoPage/EditStudent'
 import EditProfessor from './pages/SettingsPage/EditInfoPage/EditProfessor'
 import AddStudentClass from './pages/ClassPage/AddClassPage/AddStudentClass'
 import AddProfessorClass from './pages/ClassPage/AddClassPage/AddProfessorClass'
+import StudentTimeTable from './pages/TimeTablePage/StudentTimeTable'
+import ProfessorTimeTable from './pages/TimeTablePage/ProfessorTimeTable'
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
         <Route path='/professor-changepass' exact element={<ProfessorChangePass/>}/>
         <Route path='/student-editprofile' exact element={<EditStudent/>}/>
         <Route path='/professor-editprofile' exact element={<EditProfessor/>}/>
+        <Route path='/student-timetable' exact element={<StudentTimeTable/>}/>
+        <Route path='/professor-timetable' exact element={<ProfessorTimeTable/>}/>
         <Route path='/upanget' exact element={<SecretPage/>}/>
       </Routes>
     </>

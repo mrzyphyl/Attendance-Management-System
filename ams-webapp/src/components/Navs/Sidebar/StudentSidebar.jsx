@@ -189,7 +189,7 @@ export default function StudentSideBar() {
                             <ListItemText primary="Class" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} >
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate("/student-timetable")}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,
