@@ -13,13 +13,10 @@ function AddStudentClassComp() {
   const [subject_name, setSubjectName] = useState('')
   const [subject_time, setSubjectTime] = useState('')
   const [subject_instructor, setSubjectInstructor] = useState('')
-  const [department, setDepartment] = useState()
   const [student_enrolled, setStudentEnrolled] = useState()
   const [formError, setFormError] = useState('')
 
-  const handleTimeChange = (e) => {
-    setSubjectTime(e.target.value);
-  }
+  const filteredSubjects = subjects.filter((subject) => subject.department === user.department)
 
   const userId = localStorage.getItem('userId')
 
@@ -101,7 +98,7 @@ function AddStudentClassComp() {
                   onChange={(e) => setSubjectCode(e.target.value)}
                   >
                     <option value=''>Subject Code</option>
-                    {subjects.map((subject) => (
+                    {filteredSubjects.map((subject) => (
                       <option key={subject._id} value={subject.subject_code}>
                         {subject.subject_code}
                       </option>
@@ -114,7 +111,7 @@ function AddStudentClassComp() {
                   onChange={(e) => setSubjectName(e.target.value)}
                   >
                     <option value=''>Subject Name</option>
-                    {subjects.map((subject) => (
+                    {filteredSubjects.map((subject) => (
                       <option key={subject._id} value={subject.subject_name}>
                         {subject.subject_name}
                       </option>
@@ -127,7 +124,7 @@ function AddStudentClassComp() {
                   onChange={(e) => setSubjectInstructor(e.target.value)}
                   >
                     <option value=''>Subject Instructor</option>
-                    {subjects.map((subject) => (
+                    {filteredSubjects.map((subject) => (
                       <option key={subject._id} value={subject.subject_instructor}>
                         {subject.subject_instructor}
                       </option>
@@ -140,7 +137,7 @@ function AddStudentClassComp() {
                   onChange={(e) => setSubjectTime(e.target.value)}
                   >
                     <option value=''>Subject Time</option>
-                    {subjects.map((subject) => (
+                    {filteredSubjects.map((subject) => (
                       <option key={subject._id} value={subject.subject_time}>
                         {subject.subject_time}
                       </option>
@@ -151,7 +148,7 @@ function AddStudentClassComp() {
                     <ButtonType>Enroll</ButtonType>
                   </ButtonSubmit>
                   <CancelLink>
-                    <CancelButton onClick={() => {navigate("/professor-classes")}}>Cancel</CancelButton>
+                    <CancelButton onClick={() => {navigate("/student-classes")}}>Cancel</CancelButton>
                   </CancelLink>
                 </CreateClassForm>
               </CreateClassBox>

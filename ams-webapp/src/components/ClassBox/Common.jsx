@@ -78,6 +78,10 @@ export const ClassAddedBox = styled.div`
     margin-bottom: 2rem;
     background: #ebe8e8;
     box-shadow: inset 0px 0px 35px 0px rgba(145, 142, 142, 0.24);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `
 
 export const AddClassHeaderContainer = styled.div`
@@ -253,4 +257,16 @@ export const Select = styled.select `
       width: 80%;
       font-size: 20px;
     }
+`
+
+export const ClassAdded = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 85%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 2px rgba(15, 15, 15, 0.28);
 `

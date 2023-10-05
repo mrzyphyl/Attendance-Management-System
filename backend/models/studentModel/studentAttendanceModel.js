@@ -18,6 +18,10 @@ const subjectSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add the Subject Instructor']
     },
+    department: {
+        type: String,
+        required: [true, 'Please add the Subject Instructor']
+    },
     attendanceTimeIn: {
         type: Date,
         default: Date.now

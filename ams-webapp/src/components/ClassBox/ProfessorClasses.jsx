@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAddedBox, ClassBox, ClassContainer } from './Common'
+import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer } from './Common'
 import { IoMdAddCircle } from 'react-icons/io'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -22,14 +22,16 @@ function ProfessorClasBox() {
     .catch(err => console.log(err))
   }, [userId])
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:5000/api/professor/subjects')
-  //   .then(result => {
-  //     setSubjects(result.data)
-  //     console.log(result)
-  //   })
-  //   .catch(err => console.log(err))
-  // })
+  useEffect(() => {
+    if (!user.firstname){
+      axios.get('http://localhost:5000/api/professor/subjects')
+      .then(result => {
+        setSubjects(result.data)
+        console.log(result)
+      })
+      .catch(err => console.log(err))
+    }
+  })
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -43,6 +45,15 @@ function ProfessorClasBox() {
               </AddClass>
             </AddClassBox>
             <ClassAddedBox>
+              <ClassAdded>
+                <ul>
+                  {subjects.map((subject) => (
+                    <li key={subject._id}>
+                      {subject.subject_name} - {subject.subject_code}
+                    </li>
+                  ))}
+                </ul>
+              </ClassAdded>
             </ClassAddedBox>
           </ClassBox>
         </ClassContainer>

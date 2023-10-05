@@ -22,14 +22,17 @@ function StudentClasses() {
     .catch(err => console.log(err))
   }, [userId])
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:5000/api/student/subjects')
-  //   .then(result => {
-  //     setSubjects(result.data)
-  //     console.log(result)
-  //   })
-  //   .catch(err => console.log(err))
-  // })
+  useEffect(() => {
+    if (!user.firstname){
+      axios.get('http://localhost:5000/api/student/subjects')
+      .then(result => {
+        setSubjects(result.data)
+        console.log(result)
+      })
+      .catch(err => console.log(err))
+    }
+  })
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <StudentSidebar/>

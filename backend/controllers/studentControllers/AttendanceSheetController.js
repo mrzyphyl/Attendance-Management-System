@@ -49,7 +49,8 @@ const addAttendance = asyncHandler (async (req, res) => {
             subject_code,
             subject_name,
             subject_time,
-            subject_instructor
+            subject_instructor,
+            department
         };
 
         // Add the new medical history item to the record
