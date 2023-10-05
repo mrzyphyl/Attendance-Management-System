@@ -270,6 +270,7 @@ export const Select = styled.select `
 `
 
 export const ClassAdded = styled.div`
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

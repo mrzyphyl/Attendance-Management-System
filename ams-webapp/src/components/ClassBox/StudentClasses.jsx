@@ -55,7 +55,7 @@ function StudentClasses() {
             </AddClassBox>
             <ClassAddedBox>
               {filteredSubjects.map((subject) => (
-                <ClassAdded key={subject._id}>
+                <ClassAdded key={subject._id} onClick={() =>{navigate('/edit-student-classes')}}>
                   <Classes>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>

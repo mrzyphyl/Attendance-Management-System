@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import ProfessorSideBar from '../../Navs/Sidebar/ProfessorSidebar'
-import { AddClassBox, ClassBox, ClassContainer, AddClassHeader, AddClassHeaderContainer, CreateClassBox, CreateClassForm, Input, ButtonSubmit, ButtonType, CancelLink, CancelButton, Select, AddClassContainer } from '../Common'
+import { ClassBox, ClassContainer, AddClassHeader, AddClassHeaderContainer, CreateClassBox, CreateClassForm, Input, ButtonSubmit, ButtonType, CancelLink, CancelButton, Select, AddClassContainer } from '../Common'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -68,7 +68,7 @@ function AddProfessorClassComp() {
         setFormError('Network error. Please check your internet connection.');
       }
     })
-}
+  }
   return (
     <Box sx={{ display: 'flex' }}>
       <ProfessorSideBar/>

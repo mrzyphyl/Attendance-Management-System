@@ -1,8 +1,14 @@
 import React from 'react'
+import { Box } from '@mui/material'
+import StudentSidebar from '../../Navs/Sidebar/StudentSidebar'
 
 function EditStudentClasses() {
   return (
-    <div>EditStudentClasses</div>
+    <Box sx={{ display: 'flex' }}>
+      <StudentSidebar/>
+      <Box component='main' sx={{flexGrow: 1, p: 3}}>
+      </Box>
+    </Box>
   )
 }
 
