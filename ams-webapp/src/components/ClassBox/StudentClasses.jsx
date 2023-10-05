@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import StudentSidebar from '../Navs/Sidebar/StudentSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes, HeadingContainer } from './Common'
+import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes, DeleteButton, EditButton, EditOrDelete, HeadingContainer } from './Common'
 import { IoMdAddCircle } from 'react-icons/io'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -38,6 +38,14 @@ function StudentClasses() {
       .catch(err => console.log(err))
     }
   })
+
+  const handleDelete = (subjectId) => {
+    axios.delete(`http://localhost:5000/api/student/subjects/${subjectId}`)
+    .then(res => {console.log(res)
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
+  }
   
   return (
     <Box sx={{ display: 'flex' }}>
@@ -55,13 +63,17 @@ function StudentClasses() {
             </AddClassBox>
             <ClassAddedBox>
               {filteredSubjects.map((subject) => (
-                <ClassAdded key={subject._id} onClick={() =>{navigate('/edit-student-classes')}}>
-                  <Classes>
+                <ClassAdded key={subject._id}>
+                  <Classes onClick={() => {navigate('/student-timetable', { state: { subjectData: subject } })}}>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
                     <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>
                     <ClassLabels>Subject Instructor: {subject.subject_instructor}</ClassLabels>
                   </Classes>
+                  <EditOrDelete>
+                    <EditButton onClick={() => {navigate('/edit-student-classes', { state: { subjectData: subject } })}}>Edit</EditButton>
+                    <DeleteButton onClick={() => handleDelete(subject._id)}>Delete</DeleteButton>
+                  </EditOrDelete>
                 </ClassAdded>
               ))}
             </ClassAddedBox>

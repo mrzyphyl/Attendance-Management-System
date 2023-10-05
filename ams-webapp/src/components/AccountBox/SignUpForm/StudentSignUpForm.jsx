@@ -22,6 +22,8 @@ export function StudSignUpForm () {
     const [ email, setEmail ] = useState()
     const [ password, setPassword ] = useState()
 
+    const [fullname, setFullName] =  useState()
+
     const onSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:5000/api/student-user', { 
@@ -42,7 +44,19 @@ export function StudSignUpForm () {
             console.log('Student Data:', result.data)
             const userId = result.data._id
             localStorage.setItem('userId', userId)
-        })
+            const student = `${result.data.firstname} ${result.data.middlename} ${result.data.lastname}`
+            setFullName(student)
+            
+            axios.post('http://localhost:5000/api/student-user/attendance', { 
+            fullname: student
+            })
+            .then(result => {
+                console.log('Attendance Data:', result.data)
+                const attendanceId = result.data._id
+                localStorage.setItem('userId', attendanceId)
+            })
+            .catch(err => console.log(err))
+        }, [fullname])
         .catch(err => console.log(err))
         navigate("/student-home")
     }

@@ -37,7 +37,7 @@ const getMultipleStudentAttendance = asyncHandler (async (req, res) => {
 const postStudentAttendance = asyncHandler (async (req, res) => {
     const { fullname } = req.body
 
-    if(!subject_code && !subject_name){
+    if(!fullname){
         res.status(400)
         throw new Error('Please add all fields')
     }

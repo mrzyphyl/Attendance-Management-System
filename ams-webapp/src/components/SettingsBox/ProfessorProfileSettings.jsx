@@ -3,21 +3,20 @@ import { Box } from '@mui/material'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
 import { ButtonBox, HeaderContainer, HeaderText, ImageContainer, Info, Label, ProfileContainer, ProfileImage, SettingsBox, SettingsContainer, SubmitButton, UserInfo, UserInfoContainer, UserInformationBox } from './Common'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 function ProfessorProfileSettings() {
   const [userData, setUserData] = useState(null)
-  const {id} = useParams()
+  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/professor-user/' + id)
+    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
     .then(response => {
       setUserData(response.data)
     })
     .catch(error => {
       console.error('Error fetching user data:', error);
     })
-  }, [id])
+  }, [userId])
   return (
     <Box sx={{ display: 'flex' }}>
       <ProfessorSideBar/>

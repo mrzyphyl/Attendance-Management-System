@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -21,7 +21,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -114,14 +113,7 @@ export default function StudentSideBar() {
         window.location.href = "/"
     }
 
-    const [user, setUser] = useState([])
     const userId = localStorage.getItem('userId')
-
-    useEffect(() => {
-        axios.get(`http://localhost:5000/api/student-user/${userId}`)
-        .then(result => setUser(result.data))
-        .catch(err => console.log(err))
-    }, [userId])
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -230,7 +222,7 @@ export default function StudentSideBar() {
                             <ListItemText primary="About Us" sx={{ opacity: open ? 1 : 0 }}/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate(`/student-settings/${user._id}`)}}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate(`/student-settings/${userId}`)}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,
