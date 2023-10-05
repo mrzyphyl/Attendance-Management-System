@@ -54,6 +54,7 @@ export function StudSignUpForm () {
                 console.log('Attendance Data:', result.data)
                 const attendanceId = result.data._id
                 localStorage.setItem('userId', attendanceId)
+                localStorage.setItem('userId', userId)
             })
             .catch(err => console.log(err))
         }, [fullname])
