@@ -164,7 +164,7 @@ export const Input = styled.input `
 `
 
 export const CancelButton = styled.button `
-display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
@@ -270,8 +270,8 @@ export const Select = styled.select `
 `
 
 export const ClassAdded = styled.div`
-    cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
@@ -280,9 +280,16 @@ export const ClassAdded = styled.div`
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 2px 2px 2px rgba(15, 15, 15, 0.28);
+    @media ${devices.tablet} {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    
 `
 
 export const Classes = styled.div`
+    cursor: pointer;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -315,5 +322,76 @@ export const HeadingContainer = styled.div`
     margin-left: 0;
     @media ${devices.tablet} {
         margin-left: 2rem;
+    }
+`
+
+export const EditOrDelete = styled.div`
+    gap: 0.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 0;
+    width: 90%;
+    @media ${devices.tablet} {
+        width: 12%;
+        margin-right: 1rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+`
+
+export const DeleteButton = styled.button`
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    height: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: rgb(216, 59, 59);
+    background: linear-gradient(
+    58deg,
+    #db4949 20%,
+    #e40d0d 100%
+    );
+    &:hover {
+    filter: brightness(1.03);
+    }
+
+    @media ${devices.mobileL} {
+        margin-bottom: 0;
+        font-size: 20px;
+    }
+`
+
+export const EditButton = styled.button`
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    height: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: #0e796cb2;
+
+    @media ${devices.mobileL} {
+        margin-top: 0;
+        font-size: 20px;
     }
 `

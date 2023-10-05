@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes, HeadingContainer } from './Common'
+import { AddClass, AddClassBox, AddClassText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes, DeleteButton, EditButton, EditOrDelete, HeadingContainer } from './Common'
 import { IoMdAddCircle } from 'react-icons/io'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -39,6 +39,14 @@ function ProfessorClasBox() {
     }
   })
 
+  const handleDelete = (subjectId) => {
+    axios.delete(`http://localhost:5000/api/professor/subjects/${subjectId}`)
+    .then(res => {console.log(res)
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <ProfessorSideBar/>
@@ -55,12 +63,16 @@ function ProfessorClasBox() {
             </AddClassBox>
             <ClassAddedBox>         
               {filteredSubjects.map((subject) => (
-                <ClassAdded key={subject._id} onClick={() => {navigate('/edit-professor-classes', { state: { subjectData: subject } })}}>
+                <ClassAdded key={subject._id}>
                   <Classes>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
                     <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>
                   </Classes>
+                  <EditOrDelete>
+                    <EditButton onClick={() => {navigate('/edit-professor-classes', { state: { subjectData: subject } })}}>Edit</EditButton>
+                    <DeleteButton onClick={() => handleDelete(subject._id)}>Delete</DeleteButton>
+                  </EditOrDelete>
                 </ClassAdded>
               ))}
             </ClassAddedBox>
