@@ -1,6 +1,25 @@
 import { styled } from "styled-components";
 import { devices } from "../Device/DeviceSizes";
 
+export const AppContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const BoxContainer = styled.div `
+    height: 800px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 2px rgba(15, 15, 15, 0.28);
+`
+
 export const ClassContainer = styled.div`
     display: flex;
     align-items: center;

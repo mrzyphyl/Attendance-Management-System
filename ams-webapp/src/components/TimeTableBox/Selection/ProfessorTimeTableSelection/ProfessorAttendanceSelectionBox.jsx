@@ -3,6 +3,7 @@ import { Box } from '@mui/material'
 import ProfessorSidebar from '../../../Navs/Sidebar/ProfessorSidebar'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { AppContainer, BoxContainer } from '../../Common'
 
 function ProfessorAttendanceSelectionBox() {
   const navigate = useNavigate()
@@ -41,6 +42,10 @@ function ProfessorAttendanceSelectionBox() {
     <Box sx={{ display: 'flex' }}>
       <ProfessorSidebar/>
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
+        <AppContainer>
+          <BoxContainer>
+          </BoxContainer>
+        </AppContainer>
       </Box>
     </Box>
   )

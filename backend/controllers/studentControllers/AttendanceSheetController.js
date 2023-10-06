@@ -33,7 +33,7 @@ const getOneAttendance = asyncHandler (async (req, res) => {
 //@route PUT /api/student-user/:id/attendance
 //@access Public
 const addAttendance = asyncHandler (async (req, res) => {
-    const { subject_code, subject_name, subject_time, subject_instructor } = req.body;
+    const { subject_code, subject_name, subject_time, subject_instructor, department } = req.body;
 
     try {
         // Find the patient record by ID

@@ -3,6 +3,8 @@ import { Box } from '@mui/material'
 import StudentSideBar from '../../../Navs/Sidebar/StudentSidebar'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { AddAttendance, AddAttendanceText, AddHeader, AppContainer, BodyContainer, Container, H2, Header, Image, ImageContiner } from './Styles'
+import QR from '../../../../assets/icons/CODE.gif'
 
 function StudentAttendanceBox() {
   const navigate = useNavigate()
@@ -14,7 +16,7 @@ function StudentAttendanceBox() {
   const userId = localStorage.getItem('userId')
 
   const location = useLocation();
-  const subjectData = location.state.subjectData;
+  const subjectData = location.state.subjectData
   const attendanceData = location.state.attendanceData
 
   useEffect(() => {
@@ -49,10 +51,30 @@ function StudentAttendanceBox() {
       .catch(err => console.log(err))
     }
   }, [user.firstname, attendanceData, attend])
+
+  const onClicked = () => {
+
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <StudentSideBar/>
       <Box component='main' sx={{flexGrow: 1, p: 3}}>
+        <AppContainer>
+          <Container>
+            <ImageContiner>
+              <Image src={QR}/>
+            </ImageContiner>
+            <BodyContainer>
+              <Header>Scan the QR</Header>
+              <AddHeader>your instructor has given to you</AddHeader>
+              <H2>or</H2>
+              <AddAttendance onClick={onClicked}>
+                <AddAttendanceText>Add Attendance Manually</AddAttendanceText>
+              </AddAttendance>
+            </BodyContainer>
+          </Container>
+        </AppContainer>
       </Box>
     </Box>
   )
