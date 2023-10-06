@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import ProfessorSidebar from '../../../Navs/Sidebar/ProfessorSidebar'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AppContainer, BoxContainer } from '../../Common'
 
 function ProfessorAttendanceSelectionBox() {
@@ -13,30 +13,30 @@ function ProfessorAttendanceSelectionBox() {
 
   const userId = localStorage.getItem('userId')
 
-  const filteredSubjects = subjects.filter(subject => {
-    const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
-    return subject.subject_instructor === fullName
-  })
+  const location = useLocation()
+  const subjectData = location.state.subjectData
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/professor-user/${userId}`)
     .then(result => {
       setUser(result.data)
-      console.log(result)
+      console.log('User Data: ', result.data
+      )
     })
     .catch(err => console.log(err))
   }, [userId])
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/professor/subjects')
+      const subjectId = subjectData._id
+      axios.get(`http://localhost:5000/api/professor/subjects/${subjectId}`)
       .then(result => {
         setSubjects(result.data)
-        console.log(result)
+        console.log('Subject Data: ', result.data)
       })
       .catch(err => console.log(err))
     }
-  })
+  }, [user.firstname, subjectData, subjects])
   
   return (
     <Box sx={{ display: 'flex' }}>

@@ -22,7 +22,7 @@ function ProfessorTimeTableBox() {
     axios.get(`http://localhost:5000/api/professor-user/${userId}`)
     .then(result => {
       setUser(result.data)
-      console.log(result)
+      console.log('User Data: ', result.data)
     })
     .catch(err => console.log(err))
   }, [userId])
@@ -32,7 +32,7 @@ function ProfessorTimeTableBox() {
       axios.get('http://localhost:5000/api/professor/subjects')
       .then(result => {
         setSubjects(result.data)
-        console.log(result)
+        console.log('Subjects Data: ', result.data)
       })
       .catch(err => console.log(err))
     }

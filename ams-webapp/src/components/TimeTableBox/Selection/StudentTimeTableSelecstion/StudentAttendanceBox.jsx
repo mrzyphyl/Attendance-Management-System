@@ -13,11 +13,21 @@ function StudentAttendanceBox() {
   const [subjects, setSubjects] = useState([])
   const [attend, setAttendance] = useState([])
 
+  const [addAttendaceData, setAddAttendaceData] = useState({
+    subject_code: '',
+    subject_name: '',
+    subject_time: '',
+    subject_instructor: '',
+    department: '',
+  })
+
   const userId = localStorage.getItem('userId')
 
-  const location = useLocation();
+  const location = useLocation()
   const subjectData = location.state.subjectData
   const attendanceData = location.state.attendanceData
+
+
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/student-user/${userId}`)
@@ -35,6 +45,13 @@ function StudentAttendanceBox() {
       .then(result => {
         setSubjects(result.data)
         console.log('Subject Data:', result.data)
+        setAddAttendaceData({
+          subject_code: result.data.subject_code,
+          subject_name: result.data.subject_name,
+          subject_time: result.data.subject_time,
+          subject_instructor: result.data.subject_instructor,
+          department: result.data.department,
+        })
       })
       .catch(err => console.log(err))
     }
@@ -53,7 +70,19 @@ function StudentAttendanceBox() {
   }, [user.firstname, attendanceData, attend])
 
   const onClicked = () => {
-
+    const attendanceId = attendanceData.map((attendanceItem) => attendanceItem._id)
+    axios.post(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}/add`, { 
+      ...addAttendaceData,
+    })
+    .then(result => {
+        console.log('Attendance Data:', result.data)
+        navigate('/time-table/check-attendance/student', {
+          state: {
+            attendanceId: attendanceId,
+          },
+        })
+    })
+    .catch(err => console.log(err))
   }
 
   return (
