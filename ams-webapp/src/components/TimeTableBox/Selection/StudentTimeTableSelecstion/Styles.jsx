@@ -105,3 +105,40 @@ export const AddAttendanceText = styled.p`
         font-size: 23px;
     }
 `
+
+export const Button = styled.button`
+    cursor: pointer;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 100px;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin-top: 5px;
+    text-align: center;
+    background: #97110ccc;
+
+    @media ${devices.tablet} {
+        width: 400px;
+        padding-bottom: 2.5rem;
+        margin: 10px 20px 20px;
+    }
+`
+
+export const ButtonText = styled.p`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    color: white;
+    font-weight: 200;
+    font-size: 15px;
+    margin-top: 25px;
+
+    @media ${devices.tablet} {
+        margin-top: 50px;
+        font-size: 23px;
+    }
+`

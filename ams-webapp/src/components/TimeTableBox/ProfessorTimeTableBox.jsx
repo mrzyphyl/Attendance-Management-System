@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ProfessorSideBar from '../Navs/Sidebar/ProfessorSidebar'
-import { ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes } from './Common'
+import { Button, ButtonText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes } from './Common'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -55,6 +55,9 @@ function ProfessorTimeTableBox() {
                 </ClassAdded>
               ))}
             </ClassAddedBox>
+            <Button onClick={() => {navigate('/time-table/check-attendance/professor')}}>
+              <ButtonText>Check Attendance</ButtonText>
+            </Button>
           </ClassBox>
         </ClassContainer>
       </Box>

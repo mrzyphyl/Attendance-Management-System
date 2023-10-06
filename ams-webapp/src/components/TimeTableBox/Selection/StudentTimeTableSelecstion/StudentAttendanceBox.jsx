@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import StudentSideBar from '../../../Navs/Sidebar/StudentSidebar'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AddAttendance, AddAttendanceText, AddHeader, AppContainer, BodyContainer, Container, H2, Header, Image, ImageContiner } from './Styles'
+import { AddAttendance, AddAttendanceText, AddHeader, AppContainer, BodyContainer, Button, ButtonText, Container, H2, Header, Image, ImageContiner } from './Styles'
 import QR from '../../../../assets/icons/CODE.gif'
 
 function StudentAttendanceBox() {
@@ -71,7 +71,7 @@ function StudentAttendanceBox() {
 
   const onClicked = () => {
     const attendanceId = attendanceData.map((attendanceItem) => attendanceItem._id)
-    axios.post(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}/add`, { 
+    axios.post(`http://localhost:5000/api/student-user-attendance/attendance/add/${attendanceId}`, { 
       ...addAttendaceData,
     })
     .then(result => {
@@ -101,6 +101,9 @@ function StudentAttendanceBox() {
               <AddAttendance onClick={onClicked}>
                 <AddAttendanceText>Add Attendance Manually</AddAttendanceText>
               </AddAttendance>
+              <Button onClick={() => {navigate('/student-timetable')}}>
+                <ButtonText>Go Back</ButtonText>
+              </Button>
             </BodyContainer>
           </Container>
         </AppContainer>

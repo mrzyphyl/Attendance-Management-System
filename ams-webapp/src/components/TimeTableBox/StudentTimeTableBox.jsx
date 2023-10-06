@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import StudentSideBar from '../Navs/Sidebar/StudentSidebar'
-import { ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes } from './Common'
+import { Button, ButtonText, ClassAdded, ClassAddedBox, ClassBox, ClassContainer, ClassLabels, Classes } from './Common'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -86,6 +86,9 @@ function StudentTimeTableBox() {
                 </ClassAdded>
               ))}
             </ClassAddedBox>
+            <Button>
+              <ButtonText>Check Attendance</ButtonText>
+            </Button>
           </ClassBox>
         </ClassContainer>
       </Box>
