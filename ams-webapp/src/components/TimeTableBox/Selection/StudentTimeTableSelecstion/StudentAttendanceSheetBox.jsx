@@ -8,23 +8,27 @@ import axios from 'axios'
 import { Button, ButtonText, CheckAttendanceContainer, CheckAttendanceHeader, H2 } from './Styles'
 
 function StudentAttendanceSheetBox() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [user, setUser] = useState([]);
-  const [attendanceData, setAttendanceData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [user, setUser] = useState([])
+  const [attendanceData, setAttendanceData] = useState([])
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedAttendance, setSelectedAttendance] = useState([])
+  const [matchingAttendance, setMatchingAttendance] = useState([])
 
-  const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId')
 
-  const location = useLocation();
+  const location = useLocation()
   const attendanceId = location.state.attendanceId
   const filteredAttendance = location.state.attendanceData
+
+  const savedAttendanceData = JSON.parse(localStorage.getItem('attendanceData'))
 
   useEffect(() => {
     if(!user.firstname){
       axios.get(`http://localhost:5000/api/student-user/${userId}`)
       .then((result) => {
-        setUser(result.data);
+        setUser(result.data)
         console.log('User Data: ', result.data)
       })
       .catch((err) => console.log(err))
@@ -35,18 +39,37 @@ function StudentAttendanceSheetBox() {
     if (attendanceId) {
       axios.get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
         .then((result) => {
-          setAttendanceData(result.data)
+          setAttendanceData(Array.isArray(result.data) ? result.data : [])
+          localStorage.setItem('attendanceData', JSON.stringify(result.data))
           console.log('Attendance Data:', result.data)
         })
         .catch((err) => console.log(err))
     } else if (filteredAttendance) {
-      setAttendanceData(filteredAttendance)
-      console.log(filteredAttendance)
+      const attendanceId = filteredAttendance.map((attendanceItem) => attendanceItem._id)
+      axios.get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
+        .then((result) => {
+          setAttendanceData(Array.isArray(result.data) ? result.data : [])
+          localStorage.setItem('attendanceData', JSON.stringify(result.data))
+          console.log('Attendance Data:', result.data)
+        })
+        .catch((err) => console.log(err))
     }
   }, [attendanceId, filteredAttendance])
 
+  useEffect(() => {
+    if(!user.firstname){
+      const formattedDate = selectedDate.toISOString().split('T')[0]
+      const matchingAttendance = savedAttendanceData.attendance.filter((attendanceItem) => {
+        const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0]
+        return attendanceTimeInDate === formattedDate;
+      });
+      console.log('Matching Attendance: ', matchingAttendance)
+      setMatchingAttendance(matchingAttendance)
+    }
+  }, [selectedDate, savedAttendanceData, matchingAttendance, user.firstname])
+
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setSelectedDate(date)
   }
 
   return (
@@ -63,11 +86,16 @@ function StudentAttendanceSheetBox() {
               value={selectedDate}
               tileContent={({ date, view }) => {
                 if (view === 'month') {
-                  const formattedDate = date.toISOString().split('T')[0]; // Extract the date part
-                  const matchingAttendance = attendanceData.find(
-                    (attendanceItem) => attendanceItem.date && attendanceItem.date.split('T')[0] === formattedDate
-                  );
-                  if (matchingAttendance) {
+                  const formattedDate = date.toISOString().split('T')[0];
+                  // Check if the formattedDate exists in matchingAttendance
+                  const matchingAttendanceOnDate = matchingAttendance.filter(
+                    (attendanceItem) => {
+                      // Format the attendanceTimeIn date as "yyyy-MM-dd"
+                      const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0];
+                      return attendanceTimeInDate === formattedDate;
+                    }
+                  )
+                  if (matchingAttendanceOnDate.length > 0) {
                     return <div className="calendar-dot" />;
                   }
                 }
@@ -75,10 +103,14 @@ function StudentAttendanceSheetBox() {
             />
             <H2>Attendance for {selectedDate.toDateString()}</H2>
             <ul>
-              {attendanceData.length > 0 ? (
-                attendanceData.map((attendanceItem) => (
+              {matchingAttendance.length > 0 ? (
+                matchingAttendance.map((attendanceItem) => (
                   <li key={attendanceItem.subject_code}>
-                    <strong>{attendanceItem.subject_name}</strong> - {attendanceItem.status}
+                    <strong>{attendanceItem.attendanceTimeIn} </strong>
+                    <strong>{attendanceItem.subject_code} </strong>
+                    <strong>{attendanceItem.subject_name} </strong>
+                    <strong>{attendanceItem.subject_instructor} </strong>
+                    <strong>{attendanceItem.department} </strong>
                   </li>
                 ))
               ) : (
