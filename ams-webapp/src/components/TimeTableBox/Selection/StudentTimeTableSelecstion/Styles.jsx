@@ -64,7 +64,7 @@ export const AddHeader = styled.h1`
 `
 
 export const H2 = styled.h2`
-    margin-top: -5px;
+    margin-top: 1rem;
     font-size: 30px;
     font-weight: 200;
 `
@@ -117,6 +117,7 @@ export const Button = styled.button`
     padding-top: 1rem;
     padding-bottom: 2rem;
     margin-top: 5px;
+    margin-bottom: 1rem;
     text-align: center;
     background: #97110ccc;
 
@@ -140,5 +141,26 @@ export const ButtonText = styled.p`
     @media ${devices.tablet} {
         margin-top: 50px;
         font-size: 23px;
+    }
+`
+
+export const CheckAttendanceContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    @media ${devices.tablet} {
+        justify-content: start;
+    }
+`
+
+export const CheckAttendanceHeader = styled.h2`
+    margin-left: 0;
+    font-size: 20px;
+    font-weight: 600;
+
+    @media ${devices.tablet} {   
+        font-size: 30px;
+        margin-left: 2rem;
     }
 `

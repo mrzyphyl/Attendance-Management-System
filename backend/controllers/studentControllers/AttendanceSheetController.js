@@ -47,16 +47,13 @@ const addAttendance = asyncHandler (async (req, res) => {
         const existingAttendance = record.attendance.find((attendance) => {
             return (
                 attendance.subject_code === subject_code &&
-                attendance.subject_name === subject_name &&
-                attendance.subject_time === subject_time &&
-                attendance.subject_instructor === subject_instructor &&
-                attendance.department === department
+                attendance.date.toDateString() === new Date().toDateString()
             )
         })
 
         if (existingAttendance) {
             res.status(400)
-            throw new Error('Attendance already checked')
+            throw new Error('Attendance already checked today')
         }
 
         // Create a new medical history item

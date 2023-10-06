@@ -86,7 +86,14 @@ function StudentTimeTableBox() {
                 </ClassAdded>
               ))}
             </ClassAddedBox>
-            <Button>
+            <Button 
+            onClick={() => {
+              navigate('/time-table/check-attendance/student', {
+                state: {
+                  attendanceData: filteredAttendance
+                },
+              })
+            }}>
               <ButtonText>Check Attendance</ButtonText>
             </Button>
           </ClassBox>

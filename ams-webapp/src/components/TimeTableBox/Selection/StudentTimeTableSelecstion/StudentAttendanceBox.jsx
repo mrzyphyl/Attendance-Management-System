@@ -27,8 +27,6 @@ function StudentAttendanceBox() {
   const subjectData = location.state.subjectData
   const attendanceData = location.state.attendanceData
 
-
-
   useEffect(() => {
     axios.get(`http://localhost:5000/api/student-user/${userId}`)
     .then(result => {
