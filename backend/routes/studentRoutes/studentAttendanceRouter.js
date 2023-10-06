@@ -19,8 +19,8 @@ router.route('/:id').delete(deltStudentAttendance).get(getOneStudentAttendance)
 
 router.route('/:ids').delete(deltMultiStudentAttendance).get(getMultipleStudentAttendance)
 
-router.route('/attendance/:id').get(getOneAttendance)
+router.route('/get/:id').get(getOneAttendance)
 
-router.route('/:id/attendance').post(addAttendance)
+router.route('/:id/add').post(addAttendance)
 
 module.exports = router
