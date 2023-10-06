@@ -64,7 +64,7 @@ function ProfessorClasBox() {
             <ClassAddedBox>         
               {filteredSubjects.map((subject) => (
                 <ClassAdded key={subject._id}>
-                  <Classes onClick={() => {navigate('/professor-timetable', { state: { subjectData: subject } })}}>
+                  <Classes onClick={() => {navigate('/timetable/time-in/professor', { state: { subjectData: subject } })}}>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
                     <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>

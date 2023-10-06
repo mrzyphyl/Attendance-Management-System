@@ -11,12 +11,18 @@ function StudentClasses() {
 
   const [user, setUser] = useState([])
   const [subjects, setSubjects] = useState([])
+  const [attend, setAttendance] = useState([])
 
   const userId = localStorage.getItem('userId')
 
   const filteredSubjects = subjects.filter(subject => {
     const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
     return subject.student_enrolled === fullName
+  })
+
+  const filteredAttendance = attend.filter(attendanceItem => {
+    const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
+    return attendanceItem.fullname === fullName
   })
 
   useEffect(() => {
@@ -46,6 +52,17 @@ function StudentClasses() {
     })
     .catch(err => console.log(err))
   }
+
+  useEffect(() => {
+    if (!user.firstname){
+      axios.get('http://localhost:5000/api/student-user-attendance/attendance')
+      .then(result => {
+        setAttendance(result.data)
+        console.log('Attendance Data:', result.data)
+      })
+      .catch(err => console.log(err))
+    }
+  }, [user.firstname, attend])
   
   return (
     <Box sx={{ display: 'flex' }}>
@@ -64,7 +81,18 @@ function StudentClasses() {
             <ClassAddedBox>
               {filteredSubjects.map((subject) => (
                 <ClassAdded key={subject._id}>
-                  <Classes onClick={() => {navigate('/student-timetable', { state: { subjectData: subject } })}}>
+                  <Classes onClick={() => {
+                    if (filteredAttendance.length > 0) {
+                      navigate('/timetable/time-in/student', {
+                        state: {
+                          subjectData: subject,
+                          attendanceData: filteredAttendance
+                        },
+                      });
+                    } else {
+                      console.log('Attendance data is empty');
+                    }
+                  }}>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
                     <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>

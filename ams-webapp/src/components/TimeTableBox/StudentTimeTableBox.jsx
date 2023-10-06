@@ -24,7 +24,7 @@ function StudentTimeTableBox() {
     return attendanceItem.fullname === fullName
   })
 
-  console.log(filteredAttendance)
+
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/student-user/${userId}`)
@@ -66,7 +66,18 @@ function StudentTimeTableBox() {
             <ClassAddedBox>
               {filteredSubjects.map((subject) => (
                 <ClassAdded key={subject._id}>
-                  <Classes onClick={() => {navigate('/timetable/time-in/student', { state: { subjectData: subject } })}}>
+                  <Classes onClick={() => {
+                    if (filteredAttendance.length > 0) {
+                      navigate('/timetable/time-in/student', {
+                        state: {
+                          subjectData: subject,
+                          attendanceData: filteredAttendance
+                        },
+                      });
+                    } else {
+                      console.log('Attendance data is empty');
+                    }
+                  }}>
                     <ClassLabels>Subject Code: {subject.subject_code}</ClassLabels>
                     <ClassLabels>Subject Name: {subject.subject_name}</ClassLabels>
                     <ClassLabels>Subject Time: {subject.subject_time}</ClassLabels>
