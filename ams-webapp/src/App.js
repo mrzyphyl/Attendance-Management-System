@@ -22,7 +22,10 @@ import StudentTimeTable from './pages/TimeTablePage/StudentTimeTable'
 import ProfessorTimeTable from './pages/TimeTablePage/ProfessorTimeTable'
 import EditStudentClass from './pages/ClassPage/EditClassPage/EditStudentClass'
 import EditProfessorClass from './pages/ClassPage/EditClassPage/EditProfessorClass'
-
+import StudentAttendance from './pages/TimeTablePage/StudentTimeTableSelection/StudentAttendance'
+import ProfessorAttendance from './pages/TimeTablePage/ProfessorTimeTableSelection/ProfessorAttendance'
+import StudentAttendaceSheet from './pages/TimeTablePage/StudentTimeTableSelection/StudentAttendanceSheet'
+import ProfessorShowClassAttendance from './pages/TimeTablePage/ProfessorTimeTableSelection/ProfessorShowClassAttendance'
 
 function App() {
   return (
@@ -50,6 +53,10 @@ function App() {
         <Route path='/professor-editprofile' exact element={<EditProfessor/>}/>
         <Route path='/student-timetable' exact element={<StudentTimeTable/>}/>
         <Route path='/professor-timetable' exact element={<ProfessorTimeTable/>}/>
+        <Route path='/timetable/time-in/student' exact element={<StudentAttendance/>}/>
+        <Route path='/timetable/time-in/professor' exact element={<ProfessorAttendance/>}/>
+        <Route path='/time-table/check-attendance/student' exact element={<StudentAttendaceSheet/>}/>
+        <Route path='/time-table/check-attendance/professor' exact element={<ProfessorShowClassAttendance/>}/>
         <Route path='/upanget' exact element={<SecretPage/>}/>
       </Routes>
     </>
