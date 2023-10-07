@@ -12,8 +12,8 @@ const getOneAttendance = asyncHandler (async (req, res) => {
     })
 
     if (!record) {
-        res.status(404); //Change the status to 404 for "Not Found"
-        throw new Error('Record not found');
+        res.status(404)
+        throw new Error('Record not found')
     }
 
     //Find the specific Attendance record within the array
@@ -22,11 +22,11 @@ const getOneAttendance = asyncHandler (async (req, res) => {
     )
 
     if (!attendanceItem) {
-        res.status(404); // Change the status to 404 for "Not Found"
-        throw new Error('Item not found');
+        res.status(404)
+        throw new Error('Item not found')
     }
 
-    res.status(200).json(attendanceItem);
+    res.status(200).json(attendanceItem)
 })
 
 //Add Attendance for Student User
@@ -37,43 +37,51 @@ const addAttendance = asyncHandler (async (req, res) => {
 
     try {
         // Find the patient record by ID
-        const record = await studentAttendance.findById(req.params.id);
+        const record = await studentAttendance.findById(req.params.id)
 
         if (!record) {
-            res.status(404); // Change the status to 404 for "Not Found"
-            throw new Error('Record not found');
+            res.status(404)
+            throw new Error('Record not found')
         }
 
-        const existingAttendance = record.attendance.find((attendance) => {
+        const currentDate = new Date()
+        const today = new Date(currentDate.toISOString().split('T')[0])
+        const tomorrow = new Date(currentDate)
+        tomorrow.setDate(currentDate.getDate() + 1)
+
+        // Check if there is an attendance record for today
+        const existingAttendanceToday = record.attendance.some((attendance) => {
+            const attendanceDate = new Date(attendance.attendanceTimeIn)
+            const attendanceDateOnly = new Date(attendanceDate.toISOString().split('T')[0])
             return (
                 attendance.subject_code === subject_code &&
-                attendance.date.toDateString() === new Date().toDateString()
+                attendanceDateOnly.getTime() === today.getTime()
             )
         })
 
-        if (existingAttendance) {
+        if (existingAttendanceToday) {
             res.status(400)
             throw new Error('Attendance already checked today')
         }
 
-        // Create a new medical history item
+        // Create a new attendance item
         const newAttendance = {
             subject_code,
             subject_name,
             subject_time,
             subject_instructor,
             department
-        };
+        }
 
-        // Add the new medical history item to the record
-        record.attendance.push(newAttendance);
+        // Add the new attendance item to the record
+        record.attendance.push(newAttendance)
 
         // Save the updated record
-        await record.save();
+        await record.save()
 
-        res.status(201).json(newAttendance);
+        res.status(201).json(newAttendance)
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message })
     }
 })
 
