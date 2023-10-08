@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import StudentSideBar from '../../../Navs/Sidebar/StudentSidebar'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AddAttendance, AddAttendanceText, AddHeader, AppContainer, BodyContainer, Button, ButtonText, Container, H2, Header, Image, ImageContiner } from './Styles'
+import { AddAttendance, AddAttendanceText, AddHeader, AppContainer, BodyContainer, Button, ButtonText, Container, Error, H2, Header, Image, ImageContiner } from './Styles'
 import QR from '../../../../assets/icons/CODE.gif'
 
 function StudentAttendanceBox() {
@@ -12,6 +12,7 @@ function StudentAttendanceBox() {
   const [user, setUser] = useState([])
   const [subjects, setSubjects] = useState([])
   const [attend, setAttendance] = useState([])
+  const [addingError, setAddingError] = useState()
 
   const [addAttendaceData, setAddAttendaceData] = useState({
     subject_code: '',
@@ -80,7 +81,10 @@ function StudentAttendanceBox() {
           },
         })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      setAddingError('You already have an attendance today')
+    })
   }
 
   return (
@@ -96,6 +100,8 @@ function StudentAttendanceBox() {
               <Header>Scan the QR</Header>
               <AddHeader>your instructor has given to you</AddHeader>
               <H2>or</H2>
+              {/* Error message */}
+              {addingError && <Error>{addingError}</Error>}
               <AddAttendance onClick={onClicked}>
                 <AddAttendanceText>Add Attendance Manually</AddAttendanceText>
               </AddAttendance>

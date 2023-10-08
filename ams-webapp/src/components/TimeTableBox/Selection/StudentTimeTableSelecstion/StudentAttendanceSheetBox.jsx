@@ -9,20 +9,20 @@ import { Button, ButtonText, CheckAttendanceContainer, CheckAttendanceHeader, H2
 
 function StudentAttendanceSheetBox() {
   const navigate = useNavigate()
-
+  
   const [user, setUser] = useState([])
   const [attendanceData, setAttendanceData] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [selectedAttendance, setSelectedAttendance] = useState([])
+  //const [selectedAttendance, setSelectedAttendance] = useState([])
   const [matchingAttendance, setMatchingAttendance] = useState([])
 
   const userId = localStorage.getItem('userId')
+  const fetchData = localStorage.getItem('attendanceData')
+  const fetchDataStr = fetchData ? JSON.parse(fetchData) : null
 
   const location = useLocation()
   const attendanceId = location.state.attendanceId
   const filteredAttendance = location.state.attendanceData
-
-  const savedAttendanceData = JSON.parse(localStorage.getItem('attendanceData'))
 
   useEffect(() => {
     if(!user.firstname){
@@ -37,36 +37,49 @@ function StudentAttendanceSheetBox() {
 
   useEffect(() => {
     if (attendanceId) {
-      axios.get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
+      axios
+        .get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
         .then((result) => {
-          setAttendanceData(Array.isArray(result.data) ? result.data : [])
-          localStorage.setItem('attendanceData', JSON.stringify(result.data))
           console.log('Attendance Data:', result.data)
+          setAttendanceData(result.data)
+          localStorage.setItem('attendanceData', JSON.stringify(result.data))
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     } else if (filteredAttendance) {
-      const attendanceId = filteredAttendance.map((attendanceItem) => attendanceItem._id)
-      axios.get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
+      const attendanceIds = filteredAttendance.map((attendanceItem) => attendanceItem._id);
+      axios
+        .get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceIds.join(',')}`)
         .then((result) => {
-          setAttendanceData(Array.isArray(result.data) ? result.data : [])
-          localStorage.setItem('attendanceData', JSON.stringify(result.data))
           console.log('Attendance Data:', result.data)
+          setAttendanceData(result.data)
+          localStorage.setItem('attendanceData', JSON.stringify(result.data))
         })
         .catch((err) => console.log(err))
     }
   }, [attendanceId, filteredAttendance])
 
   useEffect(() => {
-    if(!user.firstname){
+    if (!user.firstname) {
       const formattedDate = selectedDate.toISOString().split('T')[0]
-      const matchingAttendance = savedAttendanceData.attendance.filter((attendanceItem) => {
-        const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0]
-        return attendanceTimeInDate === formattedDate;
-      });
-      console.log('Matching Attendance: ', matchingAttendance)
-      setMatchingAttendance(matchingAttendance)
+      console.log('Formatted Date:', formattedDate)
+      console.log('Fetch Data:', fetchDataStr)
+      
+      if (fetchDataStr && fetchDataStr.attendance) {
+        console.log('Attendance Data:', fetchDataStr.attendance);
+        const matchingAttendance = fetchDataStr.attendance.filter((attendanceItem) => {
+          const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0]
+          console.log('Attendance Time In Date:', attendanceTimeInDate)
+          return attendanceTimeInDate === formattedDate
+        });
+        
+        console.log('Matching Attendance: ', matchingAttendance)
+        setMatchingAttendance(matchingAttendance)
+      } else {
+        console.log('No attendance data found.')
+        setMatchingAttendance([]);
+      }
     }
-  }, [selectedDate, savedAttendanceData, matchingAttendance, user.firstname])
+  }, [selectedDate, fetchDataStr, user.firstname])
 
   const handleDateChange = (date) => {
     setSelectedDate(date)
@@ -102,9 +115,9 @@ function StudentAttendanceSheetBox() {
               }}
             />
             <H2>Attendance for {selectedDate.toDateString()}</H2>
-            <ul>
-              {matchingAttendance.length > 0 ? (
-                matchingAttendance.map((attendanceItem) => (
+            {matchingAttendance.length > 0 ? (
+              <ul>
+                {matchingAttendance.map((attendanceItem) => (
                   <li key={attendanceItem.subject_code}>
                     <strong>{attendanceItem.attendanceTimeIn} </strong>
                     <strong>{attendanceItem.subject_code} </strong>
@@ -112,11 +125,11 @@ function StudentAttendanceSheetBox() {
                     <strong>{attendanceItem.subject_instructor} </strong>
                     <strong>{attendanceItem.department} </strong>
                   </li>
-                ))
+                ))}
+              </ul>
               ) : (
-                <li>No attendance data available</li>
-              )}
-            </ul>
+              <p>No attendance data available for the selected date.</p>
+            )}
             <Button onClick={() => navigate('/student-timetable')}>
               <ButtonText>Go Back</ButtonText>
             </Button>

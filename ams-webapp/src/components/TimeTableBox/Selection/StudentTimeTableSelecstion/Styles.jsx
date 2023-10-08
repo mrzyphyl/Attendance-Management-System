@@ -1,5 +1,6 @@
-import { styled } from "styled-components";
-import { devices } from "../../../Device/DeviceSizes";
+import { styled } from "styled-components"
+import { devices } from "../../../Device/DeviceSizes"
+import Calendar from 'react-calendar'
 
 export const AppContainer = styled.div `
     height: 800px;
@@ -163,4 +164,10 @@ export const CheckAttendanceHeader = styled.h2`
         font-size: 30px;
         margin-left: 2rem;
     }
+`
+
+export const Error = styled.p`
+    text-align: center;
+    color: rgb(239, 68, 68);
+    margin-top: 2.25rem;
 `

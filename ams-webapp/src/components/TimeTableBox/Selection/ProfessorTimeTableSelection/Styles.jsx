@@ -59,7 +59,7 @@ export const AddHeader = styled.h1`
 `
 
 export const H2 = styled.h2`
-    margin-top: -5px;
+    margin-top: 2rem;
     font-size: 20px;
     font-weight: 200;
     
@@ -150,5 +150,20 @@ export const ButtonText = styled.p`
     @media ${devices.tablet} {
         margin-top: 50px;
         font-size: 23px;
+    }
+`
+
+export const HeadingContainer = styled.div` 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0;
+    @media ${devices.tablet} {
+        width: 100%;
+        margin-left: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: start;
     }
 `

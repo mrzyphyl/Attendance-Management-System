@@ -24,8 +24,6 @@ function StudentTimeTableBox() {
     return attendanceItem.fullname === fullName
   })
 
-
-
   useEffect(() => {
     axios.get(`http://localhost:5000/api/student-user/${userId}`)
     .then(result => {
