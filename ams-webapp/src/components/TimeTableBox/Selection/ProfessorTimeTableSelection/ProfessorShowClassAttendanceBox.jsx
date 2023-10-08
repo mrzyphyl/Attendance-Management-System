@@ -6,6 +6,7 @@ import Calendar from 'react-calendar'
 import { Button, ButtonText, H2, HeadingContainer } from './Styles'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import moment from 'moment-timezone'
 
 
 function ProfessorShowClassAttendanceBox() {
@@ -14,9 +15,14 @@ function ProfessorShowClassAttendanceBox() {
   const [user, setUser] = useState([])
   const [attendanceData, setAttendanceData] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedAttendanceData, setSelectedAttendanceData] = useState([])
   const [matchingAttendance, setMatchingAttendance] = useState([])
+  const [clickedDate, setClickedDate] = useState(null)
 
   const userId = localStorage.getItem('userId')
+  const fetchData = localStorage.getItem('attendanceData')
+  const fetchDataStr = fetchData ? JSON.parse(fetchData) : null
+  const targetTimezone = 'Asia/Manila'
 
   useEffect(() => {
     if(!user.firstname){
@@ -40,20 +46,45 @@ function ProfessorShowClassAttendanceBox() {
     } 
   }, [user.firstname])
 
-  // useEffect(() => {
-  //   if (!user.firstname) {
-  //     const formattedDate = selectedDate.toISOString()
-  //     const matchingAttendance = attendanceData.filter((attendanceItem) => {
-  //       const attendanceTimeInDate = attendanceItem.attendanceTimeIn
-  //       return attendanceTimeInDate === formattedDate;
-  //     });
-  //     console.log('Matching Attendance: ', matchingAttendance);
-  //     setMatchingAttendance(matchingAttendance);
-  //   }
-  // }, [selectedDate, attendanceData, user.firstname])
+  useEffect(() => {
+    if (!user.firstname) {
+      const formattedDate = moment(selectedDate).tz(targetTimezone).format('YYYY-MM-DD')
+      console.log('Formatted Date:', formattedDate)
+      console.log('Fetch Data:', fetchDataStr)
+  
+      if (fetchDataStr && fetchDataStr.attendance) {
+        console.log('Attendance Data:', fetchDataStr.attendance);
+        const matchingAttendance = fetchDataStr.attendance.filter((attendanceItem) => {
+          const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD')
+          console.log('Attendance Time In Date:', attendanceTimeInDate)
+          return attendanceTimeInDate === formattedDate
+        });
+  
+        console.log('Matching Attendance: ', matchingAttendance)
+        setMatchingAttendance(matchingAttendance)
+      } else {
+        console.log('No attendance data found.')
+        setMatchingAttendance([]);
+      }
+    }
+  }, [selectedDate, fetchDataStr, user.firstname])
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setSelectedDate(date)
+  }
+
+  const handleTileClick = (formattedDate) => {
+    if (clickedDate === formattedDate) {
+      setClickedDate(null)
+      setSelectedAttendanceData([])
+    } else {
+      setClickedDate(formattedDate)
+      const selectedData = fetchDataStr?.attendance?.filter((attendanceItem) => {
+        const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD')
+        return attendanceTimeInDate === formattedDate
+      })
+      setSelectedAttendanceData(selectedData)
+    }
   }
   
   const allAttendanceItems = attendanceData.map((userItem) => (
@@ -73,16 +104,6 @@ function ProfessorShowClassAttendanceBox() {
     </div>
   ))
 
-//   const formattedDate = selectedDate.toISOString()
-//   const filteredAttendance = matchingAttendance.filter((attendanceItem) => {
-//   const attendanceTimeIn = attendanceItem?.attendanceTimeIn;
-//   if (attendanceTimeIn && typeof attendanceTimeIn === 'string') {
-//     const attendanceTimeInDate = attendanceTimeIn
-//     return attendanceTimeInDate === formattedDate;
-//   }
-//   return false;
-// })
-
   return (
     <Box sx={{ display: 'flex' }}>
       <ProfessorSidebar/>
@@ -95,40 +116,24 @@ function ProfessorShowClassAttendanceBox() {
             <Calendar
               onChange={handleDateChange}
               value={selectedDate}
-              // tileContent={({ date, view }) => {
-              //   if (view === 'month') {
-              //     const formattedDate = date.toISOString()
-              //     // Check if the formattedDate exists in matchingAttendance
-              //     const matchingAttendanceOnDate = matchingAttendance.filter((attendanceItem) => {
-              //       if (attendanceItem && attendanceItem.attendanceTimeIn) {
-              //         // Check if attendanceItem and attendanceTimeIn are defined before splitting the string
-              //         const attendanceTimeInDate = attendanceItem.attendanceTimeIn
-              //         return attendanceTimeInDate === formattedDate;
-              //       }
-              //       return false;
-              //     });
-              //     if (matchingAttendanceOnDate.length > 0) {
-              //       return <div className="calendar-dot" />;
-              //     }
-              //   }
-              // }}
+              tileContent={({ date, view }) => {
+                if (view === 'month') {
+                  const formattedDate = moment(date).tz(targetTimezone).format('YYYY-MM-DD'); // Format the date
+                  const hasDataForDate = fetchDataStr?.attendance?.some((attendanceItem) => {
+                    const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD'); // Format the attendance date
+                    return attendanceTimeInDate === formattedDate;
+                  });
+            
+                  if (hasDataForDate) {
+                    return (
+                      <div className="calendar-dot" onClick={() => { handleTileClick(formattedDate) }}>
+                        Present
+                      </div>
+                    );
+                  }
+                }
+              }}
             />
-            <H2>Attendance for {selectedDate.toDateString()}</H2>
-            {/* <ul>
-              {filteredAttendance.length > 0 ? (
-                filteredAttendance.map((attendanceItem) => (
-                  <li key={attendanceItem.subject_code}>
-                    <strong>{attendanceItem.attendanceTimeIn} </strong>
-                    <strong>{attendanceItem.subject_code} </strong>
-                    <strong>{attendanceItem.subject_name} </strong>
-                    <strong>{attendanceItem.subject_instructor} </strong>
-                    <strong>{attendanceItem.department} </strong>
-                  </li>
-                ))
-              ) : (
-                <li>No attendance data available</li>
-              )}
-            </ul> */}
             <H2>Select Subject per time slot</H2>
             <ul>
               {allAttendanceItems.length > 0 ? (

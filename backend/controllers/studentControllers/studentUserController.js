@@ -37,12 +37,6 @@ const getMultiStudentUser = asyncHandler (async (req, res) => {
 //@access Public
 const loginStudent = asyncHandler (async (req, res) => {
     let { email, password } = req.body
-    const bytes  = CryptoJS.AES.decrypt(password, 'secret key 123')
-    const originalPass = bytes.toString(CryptoJS.enc.Utf8)
-    
-    const compare = () => {
-        originalPass === password
-    }
 
     if(!email && !password){
         res.status(400)

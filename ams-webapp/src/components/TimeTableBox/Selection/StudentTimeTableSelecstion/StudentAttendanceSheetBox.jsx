@@ -6,6 +6,7 @@ import Calendar from 'react-calendar'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Button, ButtonText, CheckAttendanceContainer, CheckAttendanceHeader, H2 } from './Styles'
+import moment from 'moment-timezone'
 
 function StudentAttendanceSheetBox() {
   const navigate = useNavigate()
@@ -13,8 +14,9 @@ function StudentAttendanceSheetBox() {
   const [user, setUser] = useState([])
   const [attendanceData, setAttendanceData] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  //const [selectedAttendance, setSelectedAttendance] = useState([])
+  const [selectedAttendanceData, setSelectedAttendanceData] = useState([])
   const [matchingAttendance, setMatchingAttendance] = useState([])
+  const [clickedDate, setClickedDate] = useState(null)
 
   const userId = localStorage.getItem('userId')
   const fetchData = localStorage.getItem('attendanceData')
@@ -23,6 +25,8 @@ function StudentAttendanceSheetBox() {
   const location = useLocation()
   const attendanceId = location.state.attendanceId
   const filteredAttendance = location.state.attendanceData
+
+  const targetTimezone = 'Asia/Manila'
 
   useEffect(() => {
     if(!user.firstname){
@@ -44,9 +48,9 @@ function StudentAttendanceSheetBox() {
           setAttendanceData(result.data)
           localStorage.setItem('attendanceData', JSON.stringify(result.data))
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
     } else if (filteredAttendance) {
-      const attendanceIds = filteredAttendance.map((attendanceItem) => attendanceItem._id);
+      const attendanceIds = filteredAttendance.map((attendanceItem) => attendanceItem._id)
       axios
         .get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceIds.join(',')}`)
         .then((result) => {
@@ -60,18 +64,18 @@ function StudentAttendanceSheetBox() {
 
   useEffect(() => {
     if (!user.firstname) {
-      const formattedDate = selectedDate.toISOString().split('T')[0]
+      const formattedDate = moment(selectedDate).tz(targetTimezone).format('YYYY-MM-DD')
       console.log('Formatted Date:', formattedDate)
       console.log('Fetch Data:', fetchDataStr)
-      
+  
       if (fetchDataStr && fetchDataStr.attendance) {
         console.log('Attendance Data:', fetchDataStr.attendance);
         const matchingAttendance = fetchDataStr.attendance.filter((attendanceItem) => {
-          const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0]
+          const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD')
           console.log('Attendance Time In Date:', attendanceTimeInDate)
           return attendanceTimeInDate === formattedDate
         });
-        
+  
         console.log('Matching Attendance: ', matchingAttendance)
         setMatchingAttendance(matchingAttendance)
       } else {
@@ -83,6 +87,20 @@ function StudentAttendanceSheetBox() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date)
+  }
+
+  const handleTileClick = (formattedDate) => {
+    if (clickedDate === formattedDate) {
+      setClickedDate(null)
+      setSelectedAttendanceData([])
+    } else {
+      setClickedDate(formattedDate)
+      const selectedData = fetchDataStr?.attendance?.filter((attendanceItem) => {
+        const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD')
+        return attendanceTimeInDate === formattedDate
+      })
+      setSelectedAttendanceData(selectedData)
+    }
   }
 
   return (
@@ -99,27 +117,28 @@ function StudentAttendanceSheetBox() {
               value={selectedDate}
               tileContent={({ date, view }) => {
                 if (view === 'month') {
-                  const formattedDate = date.toISOString().split('T')[0];
-                  // Check if the formattedDate exists in matchingAttendance
-                  const matchingAttendanceOnDate = matchingAttendance.filter(
-                    (attendanceItem) => {
-                      // Format the attendanceTimeIn date as "yyyy-MM-dd"
-                      const attendanceTimeInDate = attendanceItem.attendanceTimeIn.split('T')[0];
-                      return attendanceTimeInDate === formattedDate;
-                    }
-                  )
-                  if (matchingAttendanceOnDate.length > 0) {
-                    return <div className="calendar-dot" />;
+                  const formattedDate = moment(date).tz(targetTimezone).format('YYYY-MM-DD'); // Format the date
+                  const hasDataForDate = fetchDataStr?.attendance?.some((attendanceItem) => {
+                    const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD'); // Format the attendance date
+                    return attendanceTimeInDate === formattedDate;
+                  });
+            
+                  if (hasDataForDate) {
+                    return (
+                      <div className="calendar-dot" onClick={() => { handleTileClick(formattedDate) }}>
+                        Present
+                      </div>
+                    );
                   }
                 }
               }}
             />
-            <H2>Attendance for {selectedDate.toDateString()}</H2>
-            {matchingAttendance.length > 0 ? (
+            {selectedAttendanceData.length > 0 ? (
               <ul>
-                {matchingAttendance.map((attendanceItem) => (
-                  <li key={attendanceItem.subject_code}>
-                    <strong>{attendanceItem.attendanceTimeIn} </strong>
+                <H2>Attendance for {selectedDate.toDateString()}</H2>
+                {selectedAttendanceData.map((attendanceItem) => (
+                  <li>
+                    <strong>{moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD HH:mm:ss')} </strong>
                     <strong>{attendanceItem.subject_code} </strong>
                     <strong>{attendanceItem.subject_name} </strong>
                     <strong>{attendanceItem.subject_instructor} </strong>
@@ -127,8 +146,8 @@ function StudentAttendanceSheetBox() {
                   </li>
                 ))}
               </ul>
-              ) : (
-              <p>No attendance data available for the selected date.</p>
+            ) : (
+              <p>Select a date that has present tag in it</p>
             )}
             <Button onClick={() => navigate('/student-timetable')}>
               <ButtonText>Go Back</ButtonText>

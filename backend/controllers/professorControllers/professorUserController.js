@@ -37,27 +37,29 @@ const getMultiProfessorUser = asyncHandler (async (req, res) => {
 //@access Public
 const loginProfessor = asyncHandler (async (req, res) => {
     let { email, password } = req.body
-    const bytes  = CryptoJS.AES.decrypt(password, 'secret key 123')
-    const originalPass = bytes.toString(CryptoJS.enc.Utf8)
-    
-    const compare = () => {
-        originalPass === password
-    }
 
-    if(!email && !compare){
+    if(!email && !password){
         res.status(400)
-        throw new Error('Please add all fields')
+        throw new Error('Please provide both email and password')
     }
 
     //Check if user exist
-    const userExist = await professorUser.findOne({email, compare})
+    const userExist = await professorUser.findOne({ email })
 
-    if(userExist){
-        const getUser = await professorUser.findOne(userExist)
-        res.status(200).json(getUser)
+    if (userExist) {
+        // Compare the entered password with the stored password
+        const bytes = CryptoJS.AES.decrypt(userExist.password, 'secret key 123');
+        const storedPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+        if (password === storedPassword) {
+            res.status(200).json(userExist)
+        } else {
+            res.status(400);
+            throw new Error('Wrong Credentials')
+        }
     } else {
         res.status(400)
-        throw new Error('Wrong Credentials')
+        throw new Error('User not found')
     }
 
 })
