@@ -121,6 +121,7 @@ export const Button = styled.button`
     padding-top: 1rem;
     padding-bottom: 2rem;
     margin-top: 5px;
+    margin-bottom: 20px;
     text-align: center;
     background: #0e796cb2;
 

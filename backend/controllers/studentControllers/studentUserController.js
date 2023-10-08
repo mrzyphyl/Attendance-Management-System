@@ -24,7 +24,7 @@ const getOneStudentUser = asyncHandler (async (req, res) => {
     res.status(200).json(studUser)
 })
 
-//Get MultipleStudent User
+//Get Multiple Student User
 //@route GET /api/student-user/:ids
 //@access Public
 const getMultiStudentUser = asyncHandler (async (req, res) => {
@@ -32,7 +32,7 @@ const getMultiStudentUser = asyncHandler (async (req, res) => {
     res.status(200).json(student)
 })
 
-//Login Professor
+//Login Student User
 //@route POST /api/student-user/login
 //@access Public
 const loginStudent = asyncHandler (async (req, res) => {
@@ -44,22 +44,29 @@ const loginStudent = asyncHandler (async (req, res) => {
         originalPass === password
     }
 
-    if(!email && !compare){
+    if(!email && !password){
         res.status(400)
-        throw new Error('Please add all fields')
+        throw new Error('Please provide both email and password')
     }
 
-    //Check if user exist
-    const userExist = await studentUser.findOne({email, compare})
-    
-    if(userExist){
-        const getUser = await studentUser.findOne(userExist)
-        res.status(200).json(getUser)
+    // Check if the user exists
+    const userExist = await studentUser.findOne({ email })
+
+    if (userExist) {
+        // Compare the entered password with the stored password
+        const bytes = CryptoJS.AES.decrypt(userExist.password, 'secret key 123');
+        const storedPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+        if (password === storedPassword) {
+            res.status(200).json(userExist)
+        } else {
+            res.status(400);
+            throw new Error('Wrong Credentials')
+        }
     } else {
         res.status(400)
-        throw new Error('Wrong Credentials')
+        throw new Error('User not found')
     }
-
 })
 
 //Post Student User

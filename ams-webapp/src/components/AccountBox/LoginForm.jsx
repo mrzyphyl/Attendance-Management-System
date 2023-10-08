@@ -15,7 +15,7 @@ export function LoginForm(){
     const navigate = useNavigate()
   
     const onSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
   
         // Send a request to the student login endpoint
         axios.post('http://localhost:5000/api/student-user/login', { email, password })
@@ -30,9 +30,9 @@ export function LoginForm(){
           .catch(studentErr => {
             console.log('Student Login Error:', studentErr)
             if (studentErr.response && studentErr.response.status === 400) {
-                setLoginError('Invalid email or password');
+                setLoginError('Invalid email or password')
             } else {
-                setLoginError('An error occurred. Please try again.');
+                setLoginError('An error occurred. Please try again.')
             }
           });
       
@@ -49,9 +49,9 @@ export function LoginForm(){
           .catch(professorErr => {
             console.log('Professor Login Error:', professorErr)
             if (professorErr.response && professorErr.response.status === 400) {
-                setLoginError('Invalid email or password');
+                setLoginError('Invalid email or password')
             } else {
-                setLoginError('An error occurred. Please try again.');
+                setLoginError('An error occurred. Please try again.')
             }
           });
     }
