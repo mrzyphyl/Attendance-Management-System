@@ -55,7 +55,7 @@ function ProfessorAttendanceSelectionBox() {
     }
   }, [user.firstname, subjectData, subjects, addAttendaceData])
   
-  const onScanned = `http://localhost:5000/api/student-user-attendance/attendance/add/${attendanceId}`
+  const onScanned = `http://localhost:5000/api/student-user-attendance/attendance/add/`
 
   return (
     <Box sx={{ display: 'flex' }}>
