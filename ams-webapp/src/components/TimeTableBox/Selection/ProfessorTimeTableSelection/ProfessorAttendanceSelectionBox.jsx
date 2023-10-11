@@ -55,7 +55,6 @@ function ProfessorAttendanceSelectionBox() {
     }
   }, [user.firstname, subjectData, subjects, addAttendaceData])
   
-  const onScanned = `http://localhost:5000/api/student-user-attendance/attendance/add/`
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -67,7 +66,7 @@ function ProfessorAttendanceSelectionBox() {
               <QRCode
               size={300}
               style={{ height: "auto", maxWidth: "100%", width: "100%"}}
-              value={onScanned}
+              value={JSON.stringify(addAttendaceData)}
               viewBox={`0 0 256 256`}
               >
               </QRCode>
