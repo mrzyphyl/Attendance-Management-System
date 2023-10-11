@@ -1,6 +1,5 @@
 import { styled } from "styled-components"
 import { devices } from "../../../Device/DeviceSizes"
-import Calendar from 'react-calendar'
 
 export const AppContainer = styled.div `
     height: 800px;

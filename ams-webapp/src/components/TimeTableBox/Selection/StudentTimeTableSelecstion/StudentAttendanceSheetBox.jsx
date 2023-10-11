@@ -12,9 +12,11 @@ function StudentAttendanceSheetBox() {
   const navigate = useNavigate()
   
   const [user, setUser] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [attendanceData, setAttendanceData] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [selectedAttendanceData, setSelectedAttendanceData] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [matchingAttendance, setMatchingAttendance] = useState([])
   const [clickedDate, setClickedDate] = useState(null)
 
@@ -117,10 +119,10 @@ function StudentAttendanceSheetBox() {
               value={selectedDate}
               tileContent={({ date, view }) => {
                 if (view === 'month') {
-                  const formattedDate = moment(date).tz(targetTimezone).format('YYYY-MM-DD'); // Format the date
+                  const formattedDate = moment(date).tz(targetTimezone).format('YYYY-MM-DD')
                   const hasDataForDate = fetchDataStr?.attendance?.some((attendanceItem) => {
-                    const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD'); // Format the attendance date
-                    return attendanceTimeInDate === formattedDate;
+                    const attendanceTimeInDate = moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD')
+                    return attendanceTimeInDate === formattedDate
                   });
             
                   if (hasDataForDate) {
@@ -128,7 +130,7 @@ function StudentAttendanceSheetBox() {
                       <div className="calendar-dot" onClick={() => { handleTileClick(formattedDate) }}>
                         Present
                       </div>
-                    );
+                    )
                   }
                 }
               }}
