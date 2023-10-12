@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Calendar from 'react-calendar'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { Button, ButtonText, CheckAttendanceContainer, CheckAttendanceHeader, H2 } from './Styles'
+import { Attendance, AttendanceAdded, AttendanceAddedBox, AttendanceLabels, Button, ButtonText, CheckAttendanceContainer, CheckAttendanceHeader, H2 } from './Styles'
 import moment from 'moment-timezone'
 
 function StudentAttendanceSheetBox() {
@@ -136,18 +136,20 @@ function StudentAttendanceSheetBox() {
               }}
             />
             {selectedAttendanceData.length > 0 ? (
-              <ul>
+              <AttendanceAddedBox>
                 <H2>Attendance for {selectedDate.toDateString()}</H2>
                 {selectedAttendanceData.map((attendanceItem) => (
-                  <li>
-                    <strong>{moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD HH:mm:ss')} </strong>
-                    <strong>{attendanceItem.subject_code} </strong>
-                    <strong>{attendanceItem.subject_name} </strong>
-                    <strong>{attendanceItem.subject_instructor} </strong>
-                    <strong>{attendanceItem.department} </strong>
-                  </li>
+                  <AttendanceAdded>
+                    <Attendance>
+                      <AttendanceLabels>{moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD HH:mm:ss')} </AttendanceLabels>
+                      <AttendanceLabels>{attendanceItem.subject_code} </AttendanceLabels>
+                      <AttendanceLabels>{attendanceItem.subject_name} </AttendanceLabels>
+                      <AttendanceLabels>{attendanceItem.subject_instructor} </AttendanceLabels>
+                      <AttendanceLabels>{attendanceItem.department} </AttendanceLabels>
+                    </Attendance>
+                  </AttendanceAdded>
                 ))}
-              </ul>
+              </AttendanceAddedBox>
             ) : (
               <p>Select a date that has present tag in it</p>
             )}

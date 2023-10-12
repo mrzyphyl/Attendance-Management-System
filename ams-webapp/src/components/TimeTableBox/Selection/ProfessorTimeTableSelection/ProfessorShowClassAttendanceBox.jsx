@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import ProfessorSidebar from '../../../Navs/Sidebar/ProfessorSidebar'
 import styled from 'styled-components'
 import Calendar from 'react-calendar'
-import { Button, ButtonText, H2, HeadingContainer } from './Styles'
+import { Attendance, AttendanceAdded, AttendanceAddedBox, AttendanceBox, AttendanceLabels, AttendanceName, Button, ButtonText, H2, HeadingContainer } from './Styles'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import moment from 'moment-timezone'
@@ -151,25 +151,25 @@ function ProfessorShowClassAttendanceBox() {
             {/* <H2>Select Subject per time slot</H2> */}
             {/* Render selectedAttendanceData */}
             {selectedAttendanceData.length > 0 ? (
-              <ul>
-                <H2>Attendance for {selectedDate.toDateString()}</H2>
-                {selectedAttendanceData.map((user) => (
-                  <li key={user.fullname}>
-                    <strong>{user.fullname}</strong>
-                    <ul>
-                      {user.attendance.map((attendanceItem) => (
-                        <li key={attendanceItem._id}>
-                          <strong>{moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD HH:mm:ss')} </strong>
-                          <strong>{attendanceItem.subject_code} </strong>
-                          <strong>{attendanceItem.subject_name} </strong>
-                          <strong>{attendanceItem.subject_instructor} </strong>
-                          <strong>{attendanceItem.department} </strong>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
+              <AttendanceAddedBox>
+                  <H2>Attendance for {selectedDate.toDateString()}</H2>
+                  {selectedAttendanceData.map((user) => (
+                    <AttendanceAdded>
+                      <AttendanceBox key={user.fullname}>
+                        <AttendanceName>{user.fullname}</AttendanceName>
+                          {user.attendance.map((attendanceItem) => (
+                            <Attendance style={{listStyleType: 'none'}} key={attendanceItem._id}>
+                              <AttendanceLabels>{moment(attendanceItem.attendanceTimeIn).tz(targetTimezone).format('YYYY-MM-DD HH:mm:ss')} </AttendanceLabels>
+                              <AttendanceLabels>{attendanceItem.subject_code} </AttendanceLabels>
+                              <AttendanceLabels>{attendanceItem.subject_name} </AttendanceLabels>
+                              <AttendanceLabels>{attendanceItem.subject_instructor} </AttendanceLabels>
+                              <AttendanceLabels>{attendanceItem.department} </AttendanceLabels>
+                            </Attendance>
+                          ))}
+                      </AttendanceBox>
+                    </AttendanceAdded>
+                  ))}
+              </AttendanceAddedBox>
             ) : (
               <p>Select a date</p>
             )}

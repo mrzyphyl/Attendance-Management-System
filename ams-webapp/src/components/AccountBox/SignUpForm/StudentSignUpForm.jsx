@@ -209,11 +209,11 @@ const ButtonType = styled.button `
     border-radius: 100px 100px 100px 100px;
     cursor: pointer;
     transition: all, 240ms ease-in-out;
-    background: rgb(241, 196, 15);
+    background: #39B68D;
     background: linear-gradient(
     58deg,
-    rgba(241, 196, 15, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
+    #39B68D 20%,
+    #007260 100%
     );
     &:hover {
     filter: brightness(1.03);

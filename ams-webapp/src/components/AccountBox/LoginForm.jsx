@@ -16,45 +16,52 @@ export function LoginForm(){
   
     const onSubmit = (e) => {
         e.preventDefault()
-  
+        // Flag to track if an error has occurred
+        let studentError = false
+        let professorError = false
+
         // Send a request to the student login endpoint
         axios.post('http://localhost:5000/api/student-user/login', { email, password })
-          .then(studentResult => {
+        .then(studentResult => {
             console.log('Student Login:', studentResult.data)
             const userId = studentResult.data._id
             const userData = studentResult.data
             localStorage.setItem('userId', userId)
             localStorage.setItem('userData', userData)
             navigate('/student-home')
-          })
-          .catch(studentErr => {
-            console.log('Student Login Error:', studentErr)
+        })
+        .catch(studentErr => {
+            console.log('Student Login Error:', studentErr);
             if (studentErr.response && studentErr.response.status === 400) {
-                setLoginError('Invalid email or password')
-            } else {
-                setLoginError('An error occurred. Please try again.')
+                studentError = true
             }
-          });
-      
+        })
+
         // Send a request to the professor login endpoint
         axios.post('http://localhost:5000/api/professor-user/login', { email, password })
-          .then(professorResult => {
+        .then(professorResult => {
             console.log('Professor Login:', professorResult.data)
             const userId = professorResult.data._id
             const userData = professorResult.data
             localStorage.setItem('userId', userId)
             localStorage.setItem('userData', userData)
             navigate('/professor-home')
-          })
-          .catch(professorErr => {
+        })
+        .catch(professorErr => {
             console.log('Professor Login Error:', professorErr)
             if (professorErr.response && professorErr.response.status === 400) {
-                setLoginError('Invalid email or password')
-            } else {
-                setLoginError('An error occurred. Please try again.')
+                professorError = true
             }
-          });
+        })
+
+        // Check both errors and set loginError if both requests fail
+        if (studentError && professorError) {
+            setLoginError('Invalid email or password')
+        } else if (studentError || professorError) {
+            setLoginError('An error occurred. Please try again.')
+        }
     }
+
     return(
         <BoxContainer>
             <ImageContainer>
@@ -108,8 +115,8 @@ const ImageContainer = styled.div `
     justify-content: center;
     align-items: center;
     background: linear-gradient(
-        rgba(241, 196, 15, 1) 20%, 
-        rgba(243, 172, 18, 1) 100%)
+        #39B68D 20%, 
+        #007260 100%)
     ;
 
     @media ${devices.laptop} {
