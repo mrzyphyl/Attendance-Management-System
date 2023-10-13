@@ -46,6 +46,7 @@ export const ClassAddedBox = styled.div`
     border-radius: 10px;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
     background: #ebe8e8;
     box-shadow: inset 0px 0px 35px 0px rgba(145, 142, 142, 0.24);
     display: flex;
