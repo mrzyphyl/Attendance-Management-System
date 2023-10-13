@@ -86,7 +86,7 @@ export function LoginForm(){
                 {/* Error message */}
                 {loginError && <Error>{loginError}</Error>}
                 <Marginer direction="vertical" margin={5} />
-                <MutedLink href="#">Forget your password?</MutedLink>
+                <MutedLink href="/changepass">Forget your password?</MutedLink>
                 <Marginer direction="vertical" margin="1.6em" />
                 <SubmitButton type="submit">
                     <SubmitLink>Sign in</SubmitLink>
