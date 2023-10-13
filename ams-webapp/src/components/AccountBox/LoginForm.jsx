@@ -36,6 +36,14 @@ export function LoginForm(){
                 studentError = true
             }
         })
+        .finally(() => {
+            // After the professor login request is complete, check both errors
+            if (studentError && professorError) {
+                setLoginError('Invalid email or password')
+            } else if (studentError || professorError) {
+                setLoginError('An error occurred. Please try again.')
+            }
+        })
 
         // Send a request to the professor login endpoint
         axios.post('http://localhost:5000/api/professor-user/login', { email, password })
@@ -51,6 +59,14 @@ export function LoginForm(){
             console.log('Professor Login Error:', professorErr)
             if (professorErr.response && professorErr.response.status === 400) {
                 professorError = true
+            }
+        })
+        .finally(() => {
+            // After the professor login request is complete, check both errors
+            if (studentError && professorError) {
+                setLoginError('Invalid email or password')
+            } else if (studentError || professorError) {
+                setLoginError('An error occurred. Please try again.')
             }
         })
 
@@ -86,7 +102,7 @@ export function LoginForm(){
                 {/* Error message */}
                 {loginError && <Error>{loginError}</Error>}
                 <Marginer direction="vertical" margin={5} />
-                <MutedLink href="/changepass">Forget your password?</MutedLink>
+                <MutedLink href="/emailconfirmpass">Forget your password?</MutedLink>
                 <Marginer direction="vertical" margin="1.6em" />
                 <SubmitButton type="submit">
                     <SubmitLink>Sign in</SubmitLink>

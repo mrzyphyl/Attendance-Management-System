@@ -31,6 +31,10 @@ export const MutedLink = styled.a `
     color: rgba(107, 105, 105, 0.8);
     font-weight: 500;
     text-decoration: none;
+
+    &:hover {
+        color: green;
+    }
 `
 
 export const BoldLink = styled.a `

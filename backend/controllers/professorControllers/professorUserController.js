@@ -140,7 +140,7 @@ const postProfessorUser = asyncHandler (async (req, res) => {
 //@access Public
 const editPassword = asyncHandler (async (req, res) => {
     //Check if User exist
-    const checkUser = await studentUser.findById(req.params.id)
+    const checkUser = await professorUser.findById(req.params.id)
 
     if(!checkUser){
         res.status(400)
@@ -148,7 +148,7 @@ const editPassword = asyncHandler (async (req, res) => {
     }
 
     const cipher = CryptoJS.AES.encrypt(req.body.password, 'secret key 123').toString()
-    const editUserPassword = await studentUser.findByIdAndUpdate(
+    const editUserPassword = await professorUser.findByIdAndUpdate(
         req.params.id,
         {password: cipher},
         {new: true}

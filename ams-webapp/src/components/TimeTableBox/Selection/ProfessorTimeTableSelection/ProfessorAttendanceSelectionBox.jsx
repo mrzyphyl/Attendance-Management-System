@@ -24,7 +24,7 @@ function ProfessorAttendanceSelectionBox() {
 
   const location = useLocation()
   const subjectData = location.state.subjectData
-  const attendanceId = location.state.attendanceData
+  //const attendanceId = location.state.attendanceData
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/professor-user/${userId}`)

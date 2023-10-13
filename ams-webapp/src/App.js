@@ -13,6 +13,7 @@ import StudentClass from './pages/ClassPage/StudentClass'
 import ProfessorClass from './pages/ClassPage/ProfessorClass';
 import SecretPage from './pages/SecretPage/SecretPage';
 import ChangePassword from './pages/SettingsPage/ChangePasswordPage/ChangePassword'
+import EmailConfirmation from './pages/SettingsPage/ChangePasswordPage/EmailConfirmation'
 import EditStudent from './pages/SettingsPage/EditInfoPage/EditStudent'
 import EditProfessor from './pages/SettingsPage/EditInfoPage/EditProfessor'
 import AddStudentClass from './pages/ClassPage/AddClassPage/AddStudentClass'
@@ -25,37 +26,46 @@ import StudentAttendance from './pages/TimeTablePage/StudentTimeTableSelection/S
 import ProfessorAttendance from './pages/TimeTablePage/ProfessorTimeTableSelection/ProfessorAttendance'
 import StudentAttendaceSheet from './pages/TimeTablePage/StudentTimeTableSelection/StudentAttendanceSheet'
 import ProfessorShowClassAttendance from './pages/TimeTablePage/ProfessorTimeTableSelection/ProfessorShowClassAttendance'
+import { useState } from 'react';
 
 function App() {
+  const userId = localStorage.getItem('userId')
+  // eslint-disable-next-line no-unused-vars
+  const [loggedIn, setLoggedIn] = useState(!!userId)
+
   return (
     <>
       <Routes>
-        <Route path='/' exact element={<Login/>}/>
-        <Route path='/roles' exact element={<Roles/>}/>
-        <Route path='/student-sign-up' exact element={<StudentSignUp/>}/>
-        <Route path='/professor-sign-up' exact element={<ProfessorSignUp/>}/>
-        <Route path='/student-home' exact element={<StudentHome/>}/>
-        <Route path='/professor-home' exact element={<ProfessorHome/>}/>
-        <Route path='/about-us-s' exact element={<AboutS/>}/>
-        <Route path='/about-us-p' exact element={<AboutP/>}/>
-        <Route path='/student-settings' exact element={<StudentSettings/>}/>
-        <Route path='/professor-settings' exact element={<ProfessorSettings/>}/>
-        <Route path='/student-classes' exact element={<StudentClass/>}/>
-        <Route path='/professor-classes' exact element={<ProfessorClass/>}/>
-        <Route path='/add-student-classes' exact element={<AddStudentClass/>}/>
-        <Route path='/add-professor-classes' exact element={<AddProfessorClass/>}/>
-        <Route path='/edit-student-classes' exact element={<EditStudentClass/>}/>
-        <Route path='/edit-professor-classes' exact element={<EditProfessorClass/>}/>
-        <Route path='/changepass' exact element={<ChangePassword/>}/>
-        <Route path='/student-editprofile' exact element={<EditStudent/>}/>
-        <Route path='/professor-editprofile' exact element={<EditProfessor/>}/>
-        <Route path='/student-timetable' exact element={<StudentTimeTable/>}/>
-        <Route path='/professor-timetable' exact element={<ProfessorTimeTable/>}/>
-        <Route path='/timetable/time-in/student' exact element={<StudentAttendance/>}/>
-        <Route path='/timetable/time-in/professor' exact element={<ProfessorAttendance/>}/>
-        <Route path='/time-table/check-attendance/student' exact element={<StudentAttendaceSheet/>}/>
-        <Route path='/time-table/check-attendance/professor' exact element={<ProfessorShowClassAttendance/>}/>
-        <Route path='/upanget' exact element={<SecretPage/>}/>
+        {/* If the user is not logged in, render this routes */}
+        {!loggedIn && <Route path='/' element={<Login />} />}
+        {!loggedIn && <Route path='/student-sign-up' element={<StudentSignUp />} />}
+        {!loggedIn && <Route path='/professor-sign-up' element={<ProfessorSignUp />} />}
+        {!loggedIn && <Route path='/roles' element={<Roles />} />}
+
+        <Route path='/student-home' element={<StudentHome />} />
+        <Route path='/professor-home' element={<ProfessorHome />} />
+        <Route path='/about-us-s' element={<AboutS />} />
+        <Route path='/about-us-p' element={<AboutP />} />
+        <Route path='/student-settings' element={<StudentSettings />} />
+        <Route path='/professor-settings' element={<ProfessorSettings />} />
+        <Route path='/student-classes' element={<StudentClass />} />
+        <Route path='/professor-classes' element={<ProfessorClass />} />
+        <Route path='/add-student-classes' element={<AddStudentClass />} />
+        <Route path='/add-professor-classes' element={<AddProfessorClass />} />
+        <Route path='/edit-student-classes' element={<EditStudentClass />} />
+        <Route path='/edit-professor-classes' element={<EditProfessorClass />} />
+        <Route path='/changepass' element={<ChangePassword />} />
+        <Route path='/emailconfirmpass' element={<EmailConfirmation />} />
+        <Route path='/student-editprofile' element={<EditStudent />} />
+        <Route path='/professor-editprofile' element={<EditProfessor />} />
+        <Route path='/student-timetable' element={<StudentTimeTable />} />
+        <Route path='/professor-timetable' element={<ProfessorTimeTable />} />
+        <Route path='/timetable/time-in/student' element={<StudentAttendance />} />
+        <Route path='/timetable/time-in/professor' element={<ProfessorAttendance />} />
+        <Route path='/time-table/check-attendance/student' element={<StudentAttendaceSheet />} />
+        <Route path='/time-table/check-attendance/professor' element={<ProfessorShowClassAttendance />} />
+
+        <Route path='/upanget' element={<SecretPage />} />
       </Routes>
     </>
   );
