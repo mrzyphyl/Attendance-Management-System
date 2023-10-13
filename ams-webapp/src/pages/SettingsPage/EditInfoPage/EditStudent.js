@@ -1,8 +1,9 @@
 import React from 'react'
+import EditStudentBox from '../../../components/SettingsBox/EditProfileBox/EditStudentBox'
 
 function EditStudent() {
   return (
-    <div>EditStudent</div>
+    <EditStudentBox/>
   )
 }
 
