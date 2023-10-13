@@ -3,8 +3,10 @@ import { Box } from '@mui/material'
 import StudentSidebar from '../Navs/Sidebar/StudentSidebar'
 import { ButtonBox, HeaderContainer, HeaderText, ImageContainer, Info, Label, ProfileContainer, ProfileImage, SettingsBox, SettingsContainer, SubmitButton, UserInfo, UserInfoContainer, UserInformationBox } from './Common'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function StudentProfileSettings() {
+  const navigate = useNavigate()
   const [userData, setUserData] = useState([])
   const userId = localStorage.getItem('userId')
 
@@ -78,8 +80,8 @@ function StudentProfileSettings() {
                   </UserInfo>
                 </UserInformationBox>
                 <ButtonBox>
-                  <SubmitButton>Edit Profile</SubmitButton>
-                  <SubmitButton>Change Password</SubmitButton>
+                  <SubmitButton onClick={() => {navigate('/student-editprofile')}}>Edit Profile</SubmitButton>
+                  <SubmitButton onClick={() => {navigate('/changepass')}}>Change Password</SubmitButton>
                 </ButtonBox>
               </UserInfoContainer>
             </ProfileContainer>

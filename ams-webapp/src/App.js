@@ -38,8 +38,8 @@ function App() {
         <Route path='/professor-home' exact element={<ProfessorHome/>}/>
         <Route path='/about-us-s' exact element={<AboutS/>}/>
         <Route path='/about-us-p' exact element={<AboutP/>}/>
-        <Route path='/student-settings/:id' exact element={<StudentSettings/>}/>
-        <Route path='/professor-settings/:id' exact element={<ProfessorSettings/>}/>
+        <Route path='/student-settings' exact element={<StudentSettings/>}/>
+        <Route path='/professor-settings' exact element={<ProfessorSettings/>}/>
         <Route path='/student-classes' exact element={<StudentClass/>}/>
         <Route path='/professor-classes' exact element={<ProfessorClass/>}/>
         <Route path='/add-student-classes' exact element={<AddStudentClass/>}/>

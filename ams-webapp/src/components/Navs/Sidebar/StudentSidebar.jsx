@@ -113,8 +113,6 @@ export default function StudentSideBar() {
         window.location.href = "/"
     }
 
-    const userId = localStorage.getItem('userId')
-
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar position='relative' elevation={0} open={open} style={{ background: '#c0b521', position: 'sticky' }}>
@@ -222,7 +220,7 @@ export default function StudentSideBar() {
                             <ListItemText primary="About Us" sx={{ opacity: open ? 1 : 0 }}/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate(`/student-settings/${userId}`)}}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => {navigate('/student-settings')}}>
                         <ListItemButton
                             sx={{
                             minHeight: 48,
