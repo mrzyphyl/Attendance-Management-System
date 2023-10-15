@@ -11,14 +11,13 @@ export function LoginForm(){
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loginError, setLoginError] = useState()
+    const [studentError, setStudentError] = useState(false)
+    const [professorError, setProfessorError] = useState(false)
   
     const navigate = useNavigate()
   
     const onSubmit = (e) => {
         e.preventDefault()
-        // Flag to track if an error has occurred
-        let studentError = false
-        let professorError = false
 
         // Send a request to the student login endpoint
         axios.post('http://localhost:5000/api/student-user/login', { email, password })
@@ -31,18 +30,8 @@ export function LoginForm(){
             navigate('/student-home')
         })
         .catch(studentErr => {
-            console.log('Student Login Error:', studentErr);
-            if (studentErr.response && studentErr.response.status === 400) {
-                studentError = true
-            }
-        })
-        .finally(() => {
-            // After the professor login request is complete, check both errors
-            if (studentError && professorError) {
-                setLoginError('Invalid email or password')
-            } else if (studentError || professorError) {
-                setLoginError('An error occurred. Please try again.')
-            }
+            console.log('Student Login Error:', studentErr)
+            setStudentError(true)
         })
 
         // Send a request to the professor login endpoint
@@ -57,21 +46,14 @@ export function LoginForm(){
         })
         .catch(professorErr => {
             console.log('Professor Login Error:', professorErr)
-            if (professorErr.response && professorErr.response.status === 400) {
-                professorError = true
-            }
-        })
-        .finally(() => {
-            // After the professor login request is complete, check both errors
-            if (studentError && professorError) {
-                setLoginError('Invalid email or password')
-            } else if (studentError || professorError) {
-                setLoginError('An error occurred. Please try again.')
-            }
+            setProfessorError(true)
         })
 
+        console.log('studentError', studentError)
+        console.log('professorError', professorError)
+
         // Check both errors and set loginError if both requests fail
-        if (studentError && professorError) {
+        if (studentError === true && professorError === true) {
             setLoginError('Invalid email or password')
         } else if (studentError || professorError) {
             setLoginError('An error occurred. Please try again.')

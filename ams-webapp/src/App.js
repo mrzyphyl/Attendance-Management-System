@@ -37,10 +37,10 @@ function App() {
     <>
       <Routes>
         {/* If the user is not logged in, render this routes */}
-        {!loggedIn && <Route path='/' element={<Login />} />}
-        {!loggedIn && <Route path='/student-sign-up' element={<StudentSignUp />} />}
-        {!loggedIn && <Route path='/professor-sign-up' element={<ProfessorSignUp />} />}
-        {!loggedIn && <Route path='/roles' element={<Roles />} />}
+        <Route path='/' element={<Login />} />
+        <Route path='/student-sign-up' element={<StudentSignUp />} />
+        <Route path='/professor-sign-up' element={<ProfessorSignUp />} />
+        <Route path='/roles' element={<Roles />} />
 
         <Route path='/student-home' element={<StudentHome />} />
         <Route path='/professor-home' element={<ProfessorHome />} />
