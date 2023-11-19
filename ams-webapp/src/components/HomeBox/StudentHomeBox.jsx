@@ -7,8 +7,10 @@ import { Modal } from '../Modal/Modal'
 import { Marginer } from '../Marginer/Margin'
 import Card from './Card'
 import Footer from '../Navs/Footer/Footer'
+import { useNavigate } from 'react-router-dom'
 
 function StudentHomeBox() {
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -28,7 +30,7 @@ function StudentHomeBox() {
                 Aims to create a QR based real-time attendance of students per subject
               </Paragraph>
               <ButtonContainer>
-                <StartButton>
+                <StartButton onClick={() => {navigate("/student-timetable")}}>
                   Get Started
                 </StartButton>
                 <StartButton onClick={openModal}>
