@@ -28,7 +28,7 @@ function ProfessorShowClassAttendanceBox() {
 
   useEffect(() => {
     if(!user.firstname){
-      axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`)
       .then((result) => {
         setUser(result.data)
         console.log('User Data: ', result.data)
@@ -39,7 +39,7 @@ function ProfessorShowClassAttendanceBox() {
 
   useEffect(() => {
     if (!user.firstname) {
-      axios.get(`http://localhost:5000/api/student-user-attendance/attendance`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance`)
         .then((result) => {
           setAttendanceData(Array.isArray(result.data) ? result.data : [])
           console.log('Attendance Data:', result.data)

@@ -27,7 +27,7 @@ function ProfessorAttendanceSelectionBox() {
   //const attendanceId = location.state.attendanceData
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`)
     .then(result => {
       setUser(result.data)
       console.log('User Data: ', result.data
@@ -39,7 +39,7 @@ function ProfessorAttendanceSelectionBox() {
   useEffect(() => {
     if (!user.firstname){
       const subjectId = subjectData._id
-      axios.get(`http://localhost:5000/api/professor/subjects/${subjectId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/professor/subjects/${subjectId}`)
       .then(result => {
         setSubjects(result.data)
         console.log('Subject Data: ', result.data)

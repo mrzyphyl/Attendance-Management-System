@@ -12,7 +12,7 @@ function EditPasswordBox() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    axios.put(`http://localhost:5000/api/professor-user/forgotpass/${userId}`,{
+    axios.put(`https://attendance-management-system-server.vercel.app/api/professor-user/forgotpass/${userId}`,{
       password
     })
     .then(response => {
@@ -23,7 +23,7 @@ function EditPasswordBox() {
     .catch(error => {
       console.error('Error fetching professor user data:', error);
     })
-    axios.put(`http://localhost:5000/api/student-user/forgotpass/${userId}`,{
+    axios.put(`https://attendance-management-system-server.vercel.app/api/student-user/forgotpass/${userId}`,{
       password
     })
     .then(response => {

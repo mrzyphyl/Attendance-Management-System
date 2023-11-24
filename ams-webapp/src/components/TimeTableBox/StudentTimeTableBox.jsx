@@ -25,7 +25,7 @@ function StudentTimeTableBox() {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/student-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
     .then(result => {
       setUser(result.data)
       console.log('User Data: ', result.data)
@@ -35,7 +35,7 @@ function StudentTimeTableBox() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/student/subjects')
+      axios.get('https://attendance-management-system-server.vercel.app/api/student/subjects')
       .then(result => {
         setSubjects(result.data)
         console.log('Subject Data:', result.data)
@@ -46,7 +46,7 @@ function StudentTimeTableBox() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/student-user-attendance/attendance')
+      axios.get('https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance')
       .then(result => {
         setAttendance(result.data)
         console.log('Attendance Data:', result.data)

@@ -15,7 +15,7 @@ function EmailConfirmationBox() {
   const [professorUserEmails, setProfessorUserEmails] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/student-user')
+    axios.get('https://attendance-management-system-server.vercel.app/api/student-user')
       .then(response => {
         const emails = response.data.map(user => user.email)
         setStudentUserEmails(emails)
@@ -25,7 +25,7 @@ function EmailConfirmationBox() {
         console.error('Error fetching student user data:', error)
       })
 
-    axios.get('http://localhost:5000/api/professor-user')
+    axios.get('https://attendance-management-system-server.vercel.app/api/professor-user')
       .then(response => {
         const emails = response.data.map(user => user.email)
         setProfessorUserEmails(emails)

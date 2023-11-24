@@ -20,7 +20,7 @@ function ProfessorClasBox() {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`)
     .then(result => {
       setUser(result.data)
       console.log(result)
@@ -30,7 +30,7 @@ function ProfessorClasBox() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/professor/subjects')
+      axios.get('https://attendance-management-system-server.vercel.app/api/professor/subjects')
       .then(result => {
         setSubjects(result.data)
         console.log(result)
@@ -40,7 +40,7 @@ function ProfessorClasBox() {
   })
 
   const handleDelete = (subjectId) => {
-    axios.delete(`http://localhost:5000/api/professor/subjects/${subjectId}`)
+    axios.delete(`https://attendance-management-system-server.vercel.app/api/professor/subjects/${subjectId}`)
     .then(res => {console.log(res)
       window.location.reload()
     })

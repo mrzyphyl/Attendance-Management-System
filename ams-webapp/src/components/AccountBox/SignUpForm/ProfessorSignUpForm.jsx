@@ -24,7 +24,7 @@ export function ProfSignUpForm () {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/professor-user', { 
+        axios.post('https://attendance-management-system-server.vercel.app/api/professor-user', { 
             firstname, 
             middlename, 
             lastname, 

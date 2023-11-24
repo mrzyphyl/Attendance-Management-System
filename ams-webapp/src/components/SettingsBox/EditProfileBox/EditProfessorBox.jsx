@@ -23,7 +23,7 @@ function EditProfessorBox() {
   const [ email, setEmail ] = useState()
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`)
     .then(response => {
       console.log(response.data)
       setFirstname(response.data.firstname)
@@ -46,7 +46,7 @@ function EditProfessorBox() {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    axios.put(`http://localhost:5000/api/professor-user/${userId}`, { 
+    axios.put(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`, { 
       firstname, 
       middlename, 
       lastname, 

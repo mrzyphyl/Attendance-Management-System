@@ -26,7 +26,7 @@ export function StudSignUpForm () {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/student-user', { 
+        axios.post('https://attendance-management-system-server.vercel.app/api/student-user', { 
             firstname, 
             middlename, 
             lastname, 
@@ -47,7 +47,7 @@ export function StudSignUpForm () {
             const student = `${result.data.firstname} ${result.data.middlename} ${result.data.lastname}`
             setFullName(student)
             
-            axios.post('http://localhost:5000/api/student-user/attendance', { 
+            axios.post('https://attendance-management-system-server.vercel.app/api/student-user/attendance', { 
             fullname: student
             })
             .then(result => {

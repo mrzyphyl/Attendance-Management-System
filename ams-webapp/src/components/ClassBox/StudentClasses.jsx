@@ -26,7 +26,7 @@ function StudentClasses() {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/student-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
     .then(result => {
       setUser(result.data)
       console.log(result)
@@ -36,7 +36,7 @@ function StudentClasses() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/student/subjects')
+      axios.get('https://attendance-management-system-server.vercel.app/api/student/subjects')
       .then(result => {
         setSubjects(result.data)
         console.log(result)
@@ -46,7 +46,7 @@ function StudentClasses() {
   })
 
   const handleDelete = (subjectId) => {
-    axios.delete(`http://localhost:5000/api/student/subjects/${subjectId}`)
+    axios.delete(`https://attendance-management-system-server.vercel.app/api/student/subjects/${subjectId}`)
     .then(res => {console.log(res)
       window.location.reload()
     })
@@ -55,7 +55,7 @@ function StudentClasses() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get('http://localhost:5000/api/student-user-attendance/attendance')
+      axios.get('https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance')
       .then(result => {
         setAttendance(result.data)
         console.log('Attendance Data:', result.data)

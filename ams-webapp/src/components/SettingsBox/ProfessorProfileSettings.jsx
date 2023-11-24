@@ -11,7 +11,7 @@ function ProfessorProfileSettings() {
   const userId = localStorage.getItem('userId')
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/professor-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/professor-user/${userId}`)
     .then(response => {
       setUserData(response.data)
     })

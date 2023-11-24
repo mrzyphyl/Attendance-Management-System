@@ -27,7 +27,7 @@ function EditStudentClasses() {
 
   useEffect(() => {
     if (!user.firstname) {
-      axios.get(`http://localhost:5000/api/student-user/${userId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
         .then(result => {
           setUser(result.data)
           console.log(result)
@@ -42,7 +42,7 @@ function EditStudentClasses() {
 
   useEffect(() => {
     if (!user.firstname){
-      axios.get(`http://localhost:5000/api/student/subjects/${subjectId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student/subjects/${subjectId}`)
       .then(result => {
         setSubjects(result.data)
         console.log(result)
@@ -64,7 +64,7 @@ function EditStudentClasses() {
       setFormError('Please add all fields')
       return
     }
-    axios.put(`http://localhost:5000/api/student/subjects/${subjectId}`, { 
+    axios.put(`https://attendance-management-system-server.vercel.app/api/student/subjects/${subjectId}`, { 
       subject_code,
       subject_name,
       subject_time,

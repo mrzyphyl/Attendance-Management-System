@@ -20,7 +20,7 @@ export function LoginForm(){
         e.preventDefault()
 
         // Send a request to the student login endpoint
-        axios.post('http://localhost:5000/api/student-user/login', { email, password })
+        axios.post('https://attendance-management-system-server.vercel.app/api/student-user/login', { email, password })
         .then(studentResult => {
             console.log('Student Login:', studentResult.data)
             const userId = studentResult.data._id
@@ -35,7 +35,7 @@ export function LoginForm(){
         })
 
         // Send a request to the professor login endpoint
-        axios.post('http://localhost:5000/api/professor-user/login', { email, password })
+        axios.post('https://attendance-management-system-server.vercel.app/api/professor-user/login', { email, password })
         .then(professorResult => {
             console.log('Professor Login:', professorResult.data)
             const userId = professorResult.data._id

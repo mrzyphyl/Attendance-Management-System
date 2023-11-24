@@ -32,7 +32,7 @@ function StudentAttendanceSheetBox() {
 
   useEffect(() => {
     if(!user.firstname){
-      axios.get(`http://localhost:5000/api/student-user/${userId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
       .then((result) => {
         setUser(result.data)
         console.log('User Data: ', result.data)
@@ -44,7 +44,7 @@ function StudentAttendanceSheetBox() {
   useEffect(() => {
     if (attendanceId) {
       axios
-        .get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
+        .get(`https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance/${attendanceId}`)
         .then((result) => {
           console.log('Attendance Data:', result.data)
           setAttendanceData(result.data)
@@ -54,7 +54,7 @@ function StudentAttendanceSheetBox() {
     } else if (filteredAttendance) {
       const attendanceIds = filteredAttendance.map((attendanceItem) => attendanceItem._id)
       axios
-        .get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceIds.join(',')}`)
+        .get(`https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance/${attendanceIds.join(',')}`)
         .then((result) => {
           console.log('Attendance Data:', result.data)
           setAttendanceData(result.data)

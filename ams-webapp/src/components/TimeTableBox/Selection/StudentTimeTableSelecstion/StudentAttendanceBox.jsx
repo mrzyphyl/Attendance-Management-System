@@ -29,7 +29,7 @@ function StudentAttendanceBox() {
   const attendanceData = location.state.attendanceData
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/student-user/${userId}`)
+    axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
     .then(result => {
       setUser(result.data)
       console.log('User Data: ', result.data)
@@ -40,7 +40,7 @@ function StudentAttendanceBox() {
   useEffect(() => {
     if (!user.firstname && subjectData){
       const subjectId = subjectData._id
-      axios.get(`http://localhost:5000/api/student/subjects/${subjectId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student/subjects/${subjectId}`)
       .then(result => {
         setSubjects(result.data)
         console.log('Subject Data:', result.data)
@@ -59,7 +59,7 @@ function StudentAttendanceBox() {
   useEffect(() => {
     if (!user.firstname && attendanceData){
       const attendanceId = attendanceData.map((attendanceItem) => attendanceItem._id)
-      axios.get(`http://localhost:5000/api/student-user-attendance/attendance/${attendanceId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance/${attendanceId}`)
       .then(result => {
         setAttendance(result.data)
         console.log('Attendance Data:', result.data)
@@ -70,7 +70,7 @@ function StudentAttendanceBox() {
 
   const onClicked = () => {
     const attendanceId = attendanceData.map((attendanceItem) => attendanceItem._id)
-    axios.post(`http://localhost:5000/api/student-user-attendance/attendance/add/${attendanceId}`, { 
+    axios.post(`https://attendance-management-system-server.vercel.app/api/student-user-attendance/attendance/add/${attendanceId}`, { 
       ...addAttendaceData,
     })
     .then(result => {

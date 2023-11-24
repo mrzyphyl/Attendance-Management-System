@@ -22,7 +22,7 @@ function AddStudentClassComp() {
 
   useEffect(() => {
     if (!user.firstname) {
-      axios.get(`http://localhost:5000/api/student-user/${userId}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/student-user/${userId}`)
         .then(result => {
           setUser(result.data)
           console.log(result)
@@ -35,7 +35,7 @@ function AddStudentClassComp() {
 
   useEffect(() => {
     if (!user.firstname) {
-      axios.get(`http://localhost:5000/api/professor/subjects?department=${user.department}`)
+      axios.get(`https://attendance-management-system-server.vercel.app/api/professor/subjects?department=${user.department}`)
       .then((result) => {
         setSubjects(result.data)
         console.log(result)
@@ -46,7 +46,7 @@ function AddStudentClassComp() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:5000/api/student/subjects', { 
+    axios.post('https://attendance-management-system-server.vercel.app/api/student/subjects', { 
       subject_code,
       subject_name,
       subject_time,
