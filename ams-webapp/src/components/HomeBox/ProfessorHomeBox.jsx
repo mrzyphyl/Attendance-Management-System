@@ -7,9 +7,10 @@ import { Modal } from '../Modal/Modal'
 import { Marginer } from '../Marginer/Margin'
 import Card from './Card'
 import Footer from '../Navs/Footer/Footer'
-
+import { useNavigate } from 'react-router-dom'
 
 function ProfessorHomeBox() {
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -31,7 +32,7 @@ function ProfessorHomeBox() {
               </Paragraph>
               <Marginer direction="vertical" margin={'0.5em'}/>
               <ButtonContainer>
-                <StartButton>
+                <StartButton onClick={() => {navigate("/professor-timetable")}}>
                   Get Started
                 </StartButton>
                 <StartButton onClick={openModal}>
