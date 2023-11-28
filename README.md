@@ -15,6 +15,21 @@ Target Users: • Students • Professors/Instructors • Database Administrator
 
 
 To Install dependencies type this commands per terminal
+Terminal 1
 ```bash
 cd ams-webapp
+```
+```bash
+npm install
+```
+Terminal 2
+```bash
+cd backend
+```
+```bash
+npm install
+```
+and in Terminal 3
+```bash
+npm install
 ```
