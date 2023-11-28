@@ -12,3 +12,9 @@ Monitoring Analysis: Professors, Instructors, and Authorized personnel can acces
 Features: The Attendance Management System will have the following features: • User Modules • Login/Signup Modules • QR Code Generation • Attendance Tracking • Reporting and Analytics • Interactive UI • Integration with Student Information System (SIS) • Mobile Application • Data Security and Privacy • Dashboards • Integration with Timetable Management
 
 Target Users: • Students • Professors/Instructors • Database Administrators
+
+
+To Install dependencies type this commands per terminal
+```bash
+cd ams-webapp
+```
