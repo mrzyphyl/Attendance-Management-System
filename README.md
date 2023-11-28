@@ -15,6 +15,7 @@ Target Users: • Students • Professors/Instructors • Database Administrator
 
 
 To Install dependencies type this commands per terminal
+
 Terminal 1
 ```bash
 cd ams-webapp
