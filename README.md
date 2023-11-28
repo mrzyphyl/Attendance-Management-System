@@ -42,17 +42,17 @@ npm install
 # NPM commands to type to run frontend or backend service simultaneously or individually
 
 
-To run frontend and backend service simultaneously type
+To run frontend and backend service simultaneously
 ```bash
 npm run dev
 ```
 
-To run frontend only type
+To run frontend only
 ```bash
 npm run client
 ```
 
-To run backend service only type
+To run backend service only
 ```bash
 npm run server
 ```
