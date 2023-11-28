@@ -14,7 +14,7 @@ Features: The Attendance Management System will have the following features: •
 Target Users: • Students • Professors/Instructors • Database Administrators
 
 
-To Install dependencies type this commands per terminal
+#To Install dependencies type this commands per terminal
 
 Terminal 1
 ```bash
