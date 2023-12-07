@@ -1,4 +1,5 @@
 # Attendance-Management-System
+https://attendance-management-system-main.vercel.app/
 Aims to create a QR based real-time attendance of students per subject
 
 Attendance Management System: Leveraging QR Code Technology for Streamlined Classroom Monitoring is a system designed to use QR technology to monitor real-time classroom activity. The system will integrate QR technology to automate and simplify the task of tracking and managing students’ attendance. Here is how the system work:
