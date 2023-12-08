@@ -1,4 +1,7 @@
 # Attendance-Management-System
+https://attendance-management-system-main.vercel.app/
+
+
 Aims to create a QR based real-time attendance of students per subject
 
 Attendance Management System: Leveraging QR Code Technology for Streamlined Classroom Monitoring is a system designed to use QR technology to monitor real-time classroom activity. The system will integrate QR technology to automate and simplify the task of tracking and managing students’ attendance. Here is how the system work:
@@ -12,3 +15,47 @@ Monitoring Analysis: Professors, Instructors, and Authorized personnel can acces
 Features: The Attendance Management System will have the following features: • User Modules • Login/Signup Modules • QR Code Generation • Attendance Tracking • Reporting and Analytics • Interactive UI • Integration with Student Information System (SIS) • Mobile Application • Data Security and Privacy • Dashboards • Integration with Timetable Management
 
 Target Users: • Students • Professors/Instructors • Database Administrators
+
+
+
+
+# To Install dependencies type this commands per terminal
+
+Terminal 1
+```bash
+cd ams-webapp
+```
+```bash
+npm install
+```
+Terminal 2
+```bash
+cd backend
+```
+```bash
+npm install
+```
+and in Terminal 3
+```bash
+npm install
+```
+
+
+
+# NPM commands to type to run frontend or backend service simultaneously or individually
+
+
+To run frontend and backend service simultaneously
+```bash
+npm run dev
+```
+
+To run frontend only
+```bash
+npm run client
+```
+
+To run backend service only
+```bash
+npm run server
+```
